@@ -1,32 +1,82 @@
 package com.silverlink.utils;
 
-public class Parrafo {
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+
+public class Oracion {
 
     private String tipoDeLetra;
     private int tamañoLetra;
     private boolean negrita;
     private boolean cursiva;
     private boolean subrayado;
+    private String colorResaltador;
     private String texto;
+    
+    private XWPFRun oracion;
 
     //Se asume el formato estándar de texto
-    public Parrafo(String texto) {
-        tipoDeLetra = "Arial Narrow";
-        tamañoLetra = 10;
-        this.texto = texto;
+    public Oracion(Parrafo parrafo, String texto) {
+        oracion = parrafo.getParagraph().createRun();
+        oracion.setFontFamily("Arial Narrow");
+        oracion.setFontSize(10);
+        oracion.setText(texto);
     }
 
-    public Parrafo(int tamañoLetra, String texto) {
-        tipoDeLetra = "Arial Narrow";
-        this.tamañoLetra = tamañoLetra;
-        this.texto = texto;
+    public Oracion(Parrafo parrafo, int tamañoLetra, String texto) {
+        oracion = parrafo.getParagraph().createRun();
+        oracion.setFontFamily("Arial Narrow");
+        oracion.setFontSize(tamañoLetra);
+        oracion.setText(texto);
     }
 
-    public Parrafo(int tamañoLetra, boolean negrita, String texto) {
-        tipoDeLetra = "Arial Narrow";
-        this.tamañoLetra = tamañoLetra;
-        this.negrita = negrita;
-        this.texto = texto;
+    public Oracion(Parrafo parrafo, int tamañoLetra, boolean negrita, String texto) {
+        oracion = parrafo.getParagraph().createRun();
+        oracion.setFontFamily("Arial Narrow");
+        oracion.setFontSize(tamañoLetra);
+        oracion.setBold(negrita);
+        oracion.setText(texto);
+    }
+
+    public Oracion(Parrafo parrafo, int tamañoLetra, boolean negrita, String colorResaltador, String texto) {
+        oracion = parrafo.getParagraph().createRun();
+        oracion.setFontFamily("Arial Narrow");
+        oracion.setFontSize(tamañoLetra);
+        oracion.setBold(negrita);
+        oracion.setTextHighlightColor(colorResaltador);
+        oracion.setText(texto);
+    }
+
+    public Oracion getOracion(){
+        return this;
+    }
+
+    public XWPFRun getRun(){
+        return oracion;
+    }
+
+    public void escribir(String texto){
+        oracion.setText(texto);
+    }
+
+    public void tabular(){
+            oracion.addTab();
+    }
+
+    public void tabular(int veces){
+        for (int i = 0; i < veces; i++) {
+            oracion.addTab();
+        }
+    }
+
+    public void retornarCarro(){
+            oracion.addCarriageReturn();
+    }
+
+    public void retornarCarro(int veces){
+        for (int i = 0; i < veces; i++) {
+            oracion.addCarriageReturn();
+        }
     }
 
 

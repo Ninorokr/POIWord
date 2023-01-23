@@ -1,2 +1,9 @@
-package com.silverlink;public class MAin {
+package com.silverlink;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        NTSCE ntsce = new NTSCE();
+        ntsce.generar();
+    }
 }
