@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.math.BigInteger;
 
-import static com.silverlink.utils.GeneradorCodBar.crearImagenCodBar;
+//import static com.silverlink.utils.GeneradorCodBar.crearImagenCodBar;
 import static com.silverlink.utils.GeneradorCodBar.generarCodBarCode128;
 
 public class NTSCE {
