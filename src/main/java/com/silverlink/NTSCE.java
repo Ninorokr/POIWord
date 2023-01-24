@@ -15,7 +15,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.math.BigInteger;
 
-import static com.silverlink.utils.GeneradorCodBar.crearImagenCodBar;
 import static com.silverlink.utils.GeneradorCodBar.generarCodBarCode128;
 
 public class NTSCE {
@@ -125,7 +124,7 @@ public class NTSCE {
             p4o11.escribir("Atentamente,");
             p4o11.retornarCarro(2);
             Oracion p4o12 = new Oracion(p4, 10, true, "ENEL Distribución Perú S.A.A.");
-            p4o12.retornarCarro(5);
+            p4o12.retornarCarro(4); // 3, para colocar el código de barras dentro de la franja del aviso
 
             Parrafo parrafoCodBar = new Parrafo(documento);
 //            pCBo1.retornarCarro(2);
@@ -133,24 +132,33 @@ public class NTSCE {
             pCBo1.tabular(3);
             pCBo1.escribir("2391829");
             pCBo1.retornarCarro();
-            pCBo1.escribir("MUNICIPALIDAD METROPOLITANA DE LIMA");
+            pCBo1.escribir("MUNICIPALIDAD METROPOLITANA DE LIMA"); //máximo 2 líneas, TODO calcular cant de caracteres máx por línea
             pCBo1.retornarCarro();
-            pCBo1.escribir("AV. ABANCAY ESQ. JR. UCAYALI");
+            pCBo1.escribir("AV. ABANCAY ESQ. JR. UCAYALI"); //máximo 3 líneas, TODO calcular cant de caracteres máx por línea
             pCBo1.retornarCarro();
             pCBo1.escribir("LIMA CERCADO");
             pCBo1.retornarCarro();
-            pCBo1.getRun().addPicture(is, XWPFDocument.PICTURE_TYPE_JPEG, "codBar", Units.toEMU(128), Units.toEMU(13)); //308 * 60
-            pCBo1.retornarCarro();
+//            pCBo1.getRun().addPicture(is, XWPFDocument.PICTURE_TYPE_JPEG, "codBar", Units.toEMU(128), Units.toEMU(13)); //308 * 60 (ORIGINAL 128x13)
+//            pCBo1.retornarCarro();
             pCBo1.tabular();
             pCBo1.escribir("       0012300019999");
+            pCBo1.retornarCarro(5); //TODO Condicionar las veces a la cantidad de lineas que ocupa el nombre de cliente y la direccion
 
-            Parrafo p5 = new Parrafo(documento, ParagraphAlignment.CENTER);
+//            Parrafo p5 = new Parrafo(documento, ParagraphAlignment.CENTER);
+            Parrafo p5 = new Parrafo(documento);
 
-            Oracion p5o2 = new Oracion(p5, 11, true, "");
-//            p5o2.retornarCarro();
-            p5o2.escribir("AVISO DE CONTRASTE POR NTCSE");
-            p5o2.retornarCarro();
-            Oracion p5o3 = new Oracion(p5, 9, true, "CARGO DE RECEPCION");
+            Oracion p5o1 = new Oracion(parrafoCodBar, 11, true, "");
+//            p5o1.retornarCarro();
+            p5o1.getRun().addPicture(is, XWPFDocument.PICTURE_TYPE_JPEG, "codBar", Units.toEMU(128), Units.toEMU(13)); //308 * 60 (ORIGINAL 128x13)
+
+//            Oracion p5o2 = new Oracion(p5, 11, true, "");
+            p5o1.tabular(2);
+//            p5o1.retornarCarro();
+            p5o1.escribir("AVISO DE CONTRASTE POR NTCSE");
+//            p5o1.retornarCarro();
+            Oracion p5o3 = new Oracion(p5, 9, true, "");
+            p5o3.tabular(6);
+            p5o3.escribir("CARGO DE RECEPCION");
 
             //COLOCAR CODIGO DE BARRAS
 
