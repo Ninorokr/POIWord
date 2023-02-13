@@ -19,7 +19,7 @@ import static com.silverlink.utils.GeneradorCodBar.generarCodBarCode128;
 
 public class NTSCE {
 
-    public void generar()throws Exception{
+    public void generar() throws Exception{
 
         BufferedImage codBar = generarCodBarCode128("0012300019999");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -132,9 +132,9 @@ public class NTSCE {
             pCBo1.tabular(3);
             pCBo1.escribir("2391829");
             pCBo1.retornarCarro();
-            pCBo1.escribir("MUNICIPALIDAD METROPOLITANA DE LIMA"); //máximo 2 líneas, TODO calcular cant de caracteres máx por línea
+            pCBo1.escribir("MUNICIPALIDAD METROPOLITANA DE LIMA"); //máximo 1 línea, 40 caracteres aprox. TODO calcular cant de caracteres máx por línea
             pCBo1.retornarCarro();
-            pCBo1.escribir("AV. ABANCAY ESQ. JR. UCAYALI"); //máximo 3 líneas, TODO calcular cant de caracteres máx por línea
+            pCBo1.escribir("AV. ABANCAY ESQ. JR. UCAYALI"); //máximo 3 líneas, 120 caracteres aprox. TODO calcular cant de caracteres máx por línea
             pCBo1.retornarCarro();
             pCBo1.escribir("LIMA CERCADO");
             pCBo1.retornarCarro();
