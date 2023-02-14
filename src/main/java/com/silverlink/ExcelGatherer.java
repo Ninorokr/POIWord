@@ -1,6 +1,7 @@
 package com.silverlink;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -28,15 +29,19 @@ public class ExcelGatherer {
      */
 
     public void extract(String excelFile){
+        ZipSecureFile.setMinInflateRatio(0);
 
         try(XSSFWorkbook wb = new XSSFWorkbook(excelFile)){
             XSSFSheet sheet;
 
             int sheetsQty = wb.getNumberOfSheets();
-            if(sheetsQty > 0){
+            if(sheetsQty == 1){
                 sheet = wb.getSheetAt(0);
             }else{
-                sheet = wb.getSheetAt((chooseSheet(wb, sheetsQty, scanner)));
+                int choice = chooseSheet(wb, sheetsQty, scanner);
+                if(choice == 9430) //Si 9431, salir de aplicación
+                    System.exit(0);
+                sheet = wb.getSheetAt(choice);
             }
 //            System.out.println("Hoja: \"" + sheet.getSheetName() + "\" | Filas: " + sheet.getLastRowNum());
             organizeData(sheet, scanner);
@@ -54,31 +59,40 @@ public class ExcelGatherer {
     /*
     * En caso de que el excel tenga varias hojas, se preguntará al usuario cual de las hojas contiene la data a extraer
     * */
-    public int chooseSheet(XSSFWorkbook wb, int n, Scanner scanner){
+    public int chooseSheet(XSSFWorkbook wb, int sheetsQty, Scanner scanner){
+        //Obtener y mostrar al cliente las hojas de Excel
         XSSFSheet sheet;
-        int qty;
+        int qty = 0;
 
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < sheetsQty; i++) {
             sheet = wb.getSheetAt(i);
-            qty = sheet.getLastRowNum();
-
+            qty = sheet.getLastRowNum()+1;
             System.out.println(i + 1 + ". " + sheet.getSheetName() + " | Filas: " +  qty);
         }
 
-        System.out.println("Elige la hoja con data: ");
+        int choice;
 
-        return scanner.nextInt()-1;
+        while(true){
+            System.out.println("Elige la hoja con data: ");
+            choice = scanner.nextInt()-1;
+            if(choice > -1 && choice < sheetsQty || choice == 9430)
+                break;
+        }
+
+        return choice;
+
     }
 
     public void getData(XSSFSheet sheet, Scanner scanner){
 
     }
 
-    public void organizeData(XSSFSheet sheet, Scanner scanner){
+    public ArrayList<Integer> organizeData(XSSFSheet sheet, Scanner scanner){
         //Los campos definidos en la base de datos
+//        String[] camposGrales = {"Programado", "Empresa", "Semana"};
         String[] campos = {"Correlativo", "Cliente", "Nombre", "Dirección", "Distrito", "Sucursal", "Sector", "Zona",
                 "Corelativo2", "Promedio", "Latitud", "Longitud", "SET", "Programado", "Marca", "Modelo", "Medidor", "Fase",
-                "Año Fab", "Empresa", "SED", "Fecha", "Hora", "Patrón", "Carga", "DNI", "ApellidoTec", "NombreTec"};
+                "Año Fab", "Empresa", "SED", "Semana", "Fecha", "Hora", "Patrón", "Carga", "DNI", "ApellidoTec", "NombreTec"};
 
         int columns = sheet.getRow(0).getLastCellNum();
 
@@ -98,7 +112,7 @@ public class ExcelGatherer {
             System.out.print("\033[H\033[2J");
         }
 
-
+        return choices;
     }
 
     public String getCellValueAsString(XSSFCell cell){
