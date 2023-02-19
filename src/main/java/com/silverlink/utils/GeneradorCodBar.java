@@ -31,7 +31,7 @@ public class GeneradorCodBar {
 //    public static String codificar128(String texto) {
 //        return (char) 136 + texto + checksum(texto) + (char) 138;
 //    }
-
+//
 //    public static char checksum(String texto) {
 //        int result = 104; // Code 128B start code
 //        for (int i = 0; i < texto.length(); i++) {
