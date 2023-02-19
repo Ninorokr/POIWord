@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01f0d091-d1a8-4ec6-88cc-d5f26883c962" name="Changes" comment="ExcelGatherer getsCells">
+    <list default="true" id="01f0d091-d1a8-4ec6-88cc-d5f26883c962" name="Changes" comment="ExcelGatherer oracion y parrafo actualizados">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/NTSCE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/NTSCE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Oracion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Oracion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Parrafo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Parrafo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676254379556</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="ExcelGatherer oracion y parrafo actualizados">
+      <created>1676805050534</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676805050534</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,7 +121,21 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="codBarTexto" />
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="hash">
+                    <value>
+                      <list>
+                        <option value="591161f" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="text">
+                    <value>
+                      <list>
+                        <option value="591161f" />
                       </list>
                     </value>
                   </entry>
@@ -134,6 +152,7 @@
     <MESSAGE value="NTSCE terminado codBar correcto" />
     <MESSAGE value="ExcelGatherer beggining" />
     <MESSAGE value="ExcelGatherer getsCells" />
-    <option name="LAST_COMMIT_MESSAGE" value="ExcelGatherer getsCells" />
+    <MESSAGE value="ExcelGatherer oracion y parrafo actualizados" />
+    <option name="LAST_COMMIT_MESSAGE" value="ExcelGatherer oracion y parrafo actualizados" />
   </component>
 </project>
