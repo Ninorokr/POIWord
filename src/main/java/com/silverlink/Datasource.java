@@ -13,6 +13,7 @@ public class Datasource {
     public static void open() {
         try {
             conn = DriverManager.getConnection(connURL);
+            System.out.println("Conectado");
         } catch (SQLException sqle) {
             System.out.println("No se pudo conectar a la BD");
             sqle.printStackTrace();
@@ -25,7 +26,7 @@ public class Datasource {
                 conn.close();
             }
         } catch (SQLException e) {
-            System.out.println("Couldn't close connection. :?");
+            System.out.println("No se pudo cerrar la conexión :?");
         }
     }
 

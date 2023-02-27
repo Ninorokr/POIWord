@@ -1,4 +1,4 @@
-package com.silverlink;
+package com.silverlink.escritores;
 
 import com.silverlink.utils.Oracion;
 import com.silverlink.utils.Parrafo;
