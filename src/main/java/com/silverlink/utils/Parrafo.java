@@ -25,29 +25,31 @@ public class Parrafo {
     }
 
     public Parrafo(XWPFDocument documento, ParagraphAlignment alineacion){
-        parrafo = documento.createParagraph();
+//        parrafo = documento.createParagraph();
+//
+//        CTPPr ppr = parrafo.getCTP().addNewPPr();
+//        CTSpacing spacing = ppr.isSetSpacing()? ppr.getSpacing() : ppr.addNewSpacing();
+//        spacing.setAfter(BigInteger.valueOf(0));
+//        spacing.setBefore(BigInteger.valueOf(0));
+//        spacing.setLineRule(STLineSpacingRule.AUTO);
+//        spacing.setLine(BigInteger.valueOf(240));
 
-        CTPPr ppr = parrafo.getCTP().addNewPPr();
-        CTSpacing spacing = ppr.isSetSpacing()? ppr.getSpacing() : ppr.addNewSpacing();
-        spacing.setAfter(BigInteger.valueOf(0));
-        spacing.setBefore(BigInteger.valueOf(0));
-        spacing.setLineRule(STLineSpacingRule.AUTO);
-        spacing.setLine(BigInteger.valueOf(240));
-
+        this(documento);
         parrafo.setAlignment(alineacion);
     }
 
     public Parrafo(XWPFDocument documento, ParagraphAlignment alineacion, int indentacionPrimeraLinea, int indentacionIzquierda){
-        parrafo = documento.createParagraph();
+//        parrafo = documento.createParagraph();
+//
+//        CTPPr ppr = parrafo.getCTP().addNewPPr();
+//        CTSpacing spacing = ppr.isSetSpacing()? ppr.getSpacing() : ppr.addNewSpacing();
+//        spacing.setAfter(BigInteger.valueOf(0));
+//        spacing.setBefore(BigInteger.valueOf(0));
+//        spacing.setLineRule(STLineSpacingRule.AUTO);
+//        spacing.setLine(BigInteger.valueOf(240));
 
-        CTPPr ppr = parrafo.getCTP().addNewPPr();
-        CTSpacing spacing = ppr.isSetSpacing()? ppr.getSpacing() : ppr.addNewSpacing();
-        spacing.setAfter(BigInteger.valueOf(0));
-        spacing.setBefore(BigInteger.valueOf(0));
-        spacing.setLineRule(STLineSpacingRule.AUTO);
-        spacing.setLine(BigInteger.valueOf(240));
-        parrafo.setAlignment(alineacion);
-
+        this(documento, alineacion);
+//        parrafo.setAlignment(alineacion);
         parrafo.setIndentationFirstLine(indentacionPrimeraLinea);
         parrafo.setIndentationLeft(indentacionIzquierda);
 //        new Parrafo(documento).getParagraph().setAlignment(alineacion);

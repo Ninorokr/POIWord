@@ -24,27 +24,30 @@ public class Oracion {
     }
 
     public Oracion(Parrafo parrafo, int tamañoLetra, String texto) {
-        oracion = parrafo.getParagraph().createRun();
-        oracion.setFontFamily("Arial Narrow");
+        this(parrafo, texto);
+//        oracion = parrafo.getParagraph().createRun();
+//        oracion.setFontFamily("Arial Narrow");
         oracion.setFontSize(tamañoLetra);
-        oracion.setText(texto);
+//        oracion.setText(texto);
     }
 
     public Oracion(Parrafo parrafo, int tamañoLetra, boolean negrita, String texto) {
-        oracion = parrafo.getParagraph().createRun();
-        oracion.setFontFamily("Arial Narrow");
-        oracion.setFontSize(tamañoLetra);
+        this(parrafo, tamañoLetra, texto);
+//        oracion = parrafo.getParagraph().createRun();
+//        oracion.setFontFamily("Arial Narrow");
+//        oracion.setFontSize(tamañoLetra);
         oracion.setBold(negrita);
-        oracion.setText(texto);
+//        oracion.setText(texto);
     }
 
     public Oracion(Parrafo parrafo, int tamañoLetra, boolean negrita, String colorResaltador, String texto) {
-        oracion = parrafo.getParagraph().createRun();
-        oracion.setFontFamily("Arial Narrow");
-        oracion.setFontSize(tamañoLetra);
-        oracion.setBold(negrita);
+        this(parrafo, tamañoLetra, negrita, texto);
+//        oracion = parrafo.getParagraph().createRun();
+//        oracion.setFontFamily("Arial Narrow");
+//        oracion.setFontSize(tamañoLetra);
+//        oracion.setBold(negrita);
         oracion.setTextHighlightColor(colorResaltador);
-        oracion.setText(texto);
+//        oracion.setText(texto);
     }
 
     public Oracion getOracion(){
