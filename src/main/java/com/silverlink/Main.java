@@ -55,7 +55,18 @@ public class Main {
 
     public static void ingresarDatosGenerales(Scanner scanner){
 
-        boolean esNTSCE;
+        boolean esNTSCE = esNTSCE(scanner);
+        boolean soloImpresion = soloImpresion(scanner);
+        String descripcionOS = descripcionOS(scanner);
+        int numCECO = elegirCECO(scanner);
+        int numUsuario = elegirUsuario(scanner);
+
+//        System.out.println("Ingresar ruta de archivo:");
+
+    }
+
+    public static boolean esNTSCE(Scanner scanner){
+        boolean esNTSCE = false;
         boolean NTSCEflag = false;
         int rptaNTSCE = 0;
 
@@ -73,14 +84,17 @@ public class Main {
 
             switch(rptaNTSCE){
                 case 1 : esNTSCE = true; NTSCEflag = true; break;
-                case 2 : esNTSCE = false; NTSCEflag = true; break;
+                case 2 : /*esNTSCE = false;*/ NTSCEflag = true; break;
                 case 9 : System.exit(0);
                 default:
                     System.out.println("Valor incorrecto");
             }
         }
+        return esNTSCE;
+    }
 
-        boolean soloImpresion;
+    public static boolean soloImpresion(Scanner scanner){
+        boolean soloImpresion = false;
         boolean soloImpresionFlag = false;
         int rptaSoloImpresion = 0;
 
@@ -98,13 +112,22 @@ public class Main {
 
             switch(rptaSoloImpresion){
                 case 1 : soloImpresion = true; soloImpresionFlag = true; break;
-                case 2 : soloImpresion = false; soloImpresionFlag = true; break;
+                case 2 : /*soloImpresion = false;*/ soloImpresionFlag = true; break;
                 case 9 : System.exit(0);
                 default:
                     System.out.println("Valor incorrecto");
             }
         }
 
-        System.out.println("Ingresar ruta de archivo:");
+        return soloImpresion;
+    }
+
+    public static String descripcionOS(Scanner scanner){
+        System.out.println("Ingrese la descripción del servicio");
+        return scanner.nextLine();
+    }
+
+    public static void elegirCECO(Scanner scanner){
+        queryCECOs();
     }
 }
