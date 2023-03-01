@@ -1,24 +1,25 @@
 package com.silverlink;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static com.silverlink.Datasource.conn;
-import static com.silverlink.Revisor.revisarListadoDeAvisos;
+import static com.silverlink.queriers.Querier.*;
 
 public class Main {
 
+    static Scanner scanner = new Scanner(System.in);
+
+    static{
+        Datasource.open();
+    }
+
     public static void main(String[] args){
 
-        Datasource.open();
-        Scanner scanner = new Scanner(System.in);
-        menuIngresarDatos(scanner);
+        menuPrincipal(scanner);
 
-
-        ResultSet rs = null;
+//        ResultSet rs = null;
 
 //        try(PreparedStatement ps = conn.prepareStatement("SELECT * FROM tblPlazoEntrega ORDER BY idPlazoEntrega ASC")){
 //            rs = ps.executeQuery();
@@ -41,28 +42,35 @@ public class Main {
 
     }
 
-    public static void menuPrincipal(){
+    public static void menuPrincipal(Scanner scanner){
         System.out.println("1 - Ingresar datos\n" +
-                           "2 - Exportar ");
+                           "2 - Exportar\n" +
+                            "9 - Salir");
+
+        int choice = scanner.nextInt();
+        switch(choice){
+            case 1: menuIngresarDatos(scanner); break;
+            case 2: ;break;
+            case 9: System.exit(0);
+        }
     }
 
     public static void menuIngresarDatos(Scanner scanner){
         ingresarDatosGenerales(scanner);
 
 
-        revisarListadoDeAvisos(scanner.nextLine());
+//        revisarListadoDeAvisos(scanner.nextLine());
     }
 
     public static void ingresarDatosGenerales(Scanner scanner){
-
+        int numServicio = elegirServicio(scanner);
+        String idCECO = elegirCECO(scanner, numServicio);
+        int numUsuario = elegirUsuario(scanner, idCECO);
+        String descripcionOS = descripcionOS(scanner);
         boolean esNTSCE = esNTSCE(scanner);
         boolean soloImpresion = soloImpresion(scanner);
-        String descripcionOS = descripcionOS(scanner);
-        int numCECO = elegirCECO(scanner);
-        int numUsuario = elegirUsuario(scanner);
 
-//        System.out.println("Ingresar ruta de archivo:");
-
+        //TODO agrupar en una clase OS (Orden de Servicio) e ingresar a BD
     }
 
     public static boolean esNTSCE(Scanner scanner){
@@ -118,7 +126,6 @@ public class Main {
                     System.out.println("Valor incorrecto");
             }
         }
-
         return soloImpresion;
     }
 
@@ -127,7 +134,27 @@ public class Main {
         return scanner.nextLine();
     }
 
-    public static void elegirCECO(Scanner scanner){
-        queryCECOs();
+    //TODO programar errores y contenciones
+
+    private static int elegirServicio(Scanner scanner){
+        HashMap<Integer, String> servicios = queryServicios();
+        System.out.println("Elegir el servicio:");
+        servicios.forEach((key, value) -> System.out.println(key + ". " + value));
+        return scanner.nextInt();
+    }
+
+    public static String elegirCECO(Scanner scanner, int servicio){
+        ArrayList<CECO> CECOs = queryCECOsPorServicio(servicio);
+        System.out.println("Elegir el CECO:");
+        for(int i = 0; i < CECOs.size(); i++)
+            System.out.println(i+1 + ". " + CECOs.get(i).getIdCECO() + " | " + CECOs.get(i).getNomCECO());
+        return CECOs.get(scanner.nextInt()-1).getIdCECO();
+    }
+
+    public static int elegirUsuario(Scanner scanner, String numCECO){
+        HashMap<Integer, String> servicios = queryUsuariosPorCECO(numCECO);
+        System.out.println("Elegir el usuario:");
+        servicios.forEach((key, value) -> System.out.println(key + ". " + value));
+        return scanner.nextInt();
     }
 }
