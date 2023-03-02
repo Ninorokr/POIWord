@@ -65,11 +65,12 @@ public class Main {
     public static void ingresarDatosGenerales(Scanner scanner){
         int numServicio = elegirServicio(scanner);
         String idCECO = elegirCECO(scanner, numServicio);
-        int numUsuario = elegirUsuario(scanner, idCECO);
+        int idUsuario = elegirUsuario(scanner, idCECO);
         String descripcionOS = descripcionOS(scanner);
         boolean esNTSCE = esNTSCE(scanner);
         boolean soloImpresion = soloImpresion(scanner);
 
+        OS os = new OS(descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion);
         //TODO agrupar en una clase OS (Orden de Servicio) e ingresar a BD
     }
 

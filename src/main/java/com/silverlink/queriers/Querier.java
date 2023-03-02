@@ -66,4 +66,18 @@ public class Querier {
         }
         return servicios;
     }
+
+    public static int cuentaOSporAnio() {
+        String countOSporAnioQuery = "SELECT COUNT(anio) FROM tblOSs WHERE anio = 23"; //La cantidad de anios 23
+        //SELECT TOP 1 nroOS FROM tblOSs ORDER BY nroOS DESC // El último NroOS
+        int OScount = 0;
+        try(PreparedStatement ps = conn.prepareStatement(countOSporAnioQuery)){
+            ResultSet rs = ps.executeQuery();
+            OScount = rs.getInt(1);
+        } catch (SQLException sqle){
+            System.out.println("No se pudo obtener la cuenta de OS por año");
+        }
+        return OScount;
+        //TODO REVISAR, revisar, revisar
+    }
 }
