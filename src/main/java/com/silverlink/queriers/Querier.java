@@ -6,6 +6,7 @@ import org.apache.logging.log4j.core.util.KeyValuePair;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,14 +69,16 @@ public class Querier {
     }
 
     public static int cuentaOSporAnio() {
-        String countOSporAnioQuery = "SELECT COUNT(anio) FROM tblOSs WHERE anio = 23"; //La cantidad de anios 23
+        String countOSporAnioQuery = "SELECT COUNT(anio) AS cuentaAnio FROM tblOSs WHERE anio = 23"; //La cantidad de anios 23
         //SELECT TOP 1 nroOS FROM tblOSs ORDER BY nroOS DESC // El último NroOS
         int OScount = 0;
-        try(PreparedStatement ps = conn.prepareStatement(countOSporAnioQuery)){
-            ResultSet rs = ps.executeQuery();
-            OScount = rs.getInt(1);
+        try(Statement stmt = conn.createStatement()){
+            ResultSet rs = stmt.executeQuery(countOSporAnioQuery);
+            while(rs.next())
+                OScount = rs.getInt(1);
         } catch (SQLException sqle){
             System.out.println("No se pudo obtener la cuenta de OS por año");
+            sqle.printStackTrace();
         }
         return OScount;
         //TODO REVISAR, revisar, revisar

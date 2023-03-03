@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.silverlink.queriers.Querier.*;
+import static com.silverlink.queriers.Commander.*;
 
 public class Main {
 
@@ -70,8 +71,11 @@ public class Main {
         boolean esNTSCE = esNTSCE(scanner);
         boolean soloImpresion = soloImpresion(scanner);
 
-        OS os = new OS(descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion);
-        //TODO agrupar en una clase OS (Orden de Servicio) e ingresar a BD
+        OS os = new OS(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion);
+
+        insertOS(os);
+
+        //TODO cambiar el nombre de la tabla en la BD tblOSsContrastes
     }
 
     public static boolean esNTSCE(Scanner scanner){
@@ -132,6 +136,7 @@ public class Main {
 
     public static String descripcionOS(Scanner scanner){
         System.out.println("Ingrese la descripción del servicio");
+        scanner.nextLine(); //Line handler
         return scanner.nextLine();
     }
 
