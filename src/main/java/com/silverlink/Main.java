@@ -51,7 +51,7 @@ public class Main {
         int choice = scanner.nextInt();
         switch(choice){
             case 1: menuIngresarDatos(scanner); break;
-            case 2: ;break;
+            case 2: //;break;
             case 9: System.exit(0);
         }
     }
@@ -64,7 +64,7 @@ public class Main {
     }
 
     public static void ingresarDatosGenerales(Scanner scanner){
-        int numServicio = elegirServicio(scanner);
+        int numServicio = 1; //1 - Reparto de avisos de contraste //elegirServicio(scanner);
         String idCECO = elegirCECO(scanner, numServicio);
         int idUsuario = elegirUsuario(scanner, idCECO);
         String descripcionOS = descripcionOS(scanner);
@@ -74,8 +74,9 @@ public class Main {
         OS os = new OS(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion);
 
         insertOS(os);
-
-        //TODO cambiar el nombre de la tabla en la BD tblOSsContrastes
+        //CONFLICTO: Qué pasa si se crea la OS y falla el análisis del Excel, no se puede volver a crear la OS
+        //Se tendría que utilizar la OS ya creada, sugerencia: crear un nuevo método que use una OS ya creada.
+        //Y asegurar que la OS no esté ocupada
     }
 
     public static boolean esNTSCE(Scanner scanner){
@@ -143,14 +144,16 @@ public class Main {
     //TODO programar errores y contenciones
 
     private static int elegirServicio(Scanner scanner){
-        HashMap<Integer, String> servicios = queryServicios();
-        System.out.println("Elegir el servicio:");
-        servicios.forEach((key, value) -> System.out.println(key + ". " + value));
-        return scanner.nextInt();
+//        HashMap<Integer, String> servicios = queryServicios();
+//        if(servicios.size() == 1) return 1;
+//        System.out.println("Elegir el servicio:");
+//        servicios.forEach((key, value) -> System.out.println(key + ". " + value));
+//        return scanner.nextInt();
     }
 
     public static String elegirCECO(Scanner scanner, int servicio){
         ArrayList<CECO> CECOs = queryCECOsPorServicio(servicio);
+        if(CECOs.size() == 1) return CECOs.get(0).getIdCECO();
         System.out.println("Elegir el CECO:");
         for(int i = 0; i < CECOs.size(); i++)
             System.out.println(i+1 + ". " + CECOs.get(i).getIdCECO() + " | " + CECOs.get(i).getNomCECO());
@@ -158,9 +161,11 @@ public class Main {
     }
 
     public static int elegirUsuario(Scanner scanner, String numCECO){
-        HashMap<Integer, String> servicios = queryUsuariosPorCECO(numCECO);
+        ArrayList<Usuario> usuarios = queryUsuariosPorCECO(numCECO);
+        if(usuarios.size() == 1) return 1;
         System.out.println("Elegir el usuario:");
-        servicios.forEach((key, value) -> System.out.println(key + ". " + value));
-        return scanner.nextInt();
+        for(int i = 0; i < usuarios.size(); i++)
+            System.out.println(i+1 + ". " + /*usuarios.get(i).getIdUsuario() + " | " + */usuarios.get(i).getNomUsuario());
+        return usuarios.get(scanner.nextInt()).getIdUsuario();
     }
 }

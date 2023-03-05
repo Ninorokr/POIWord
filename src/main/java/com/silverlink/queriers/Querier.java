@@ -1,6 +1,7 @@
 package com.silverlink.queriers;
 
 import com.silverlink.CECO;
+import com.silverlink.Usuario;
 import org.apache.logging.log4j.core.util.KeyValuePair;
 
 import java.sql.PreparedStatement;
@@ -15,17 +16,19 @@ import static com.silverlink.Datasource.conn;
 
 public class Querier {
 
-    public static HashMap<Integer, String> queryUsuariosPorCECO(String CECO){
+    public static ArrayList<Usuario> queryUsuariosPorCECO(String CECO){
         String UsuariosQuery = "SELECT tblCECOsUsuarios.idUsuario, tblUsuarios.nomUsuario FROM tblCECOsUsuarios\n" +
                                 "INNER JOIN tblUsuarios ON tblCECOsUsuarios.idUsuario = tblUsuarios.idUsuario\n" +
                                 "WHERE idCECO = ?";
-        HashMap<Integer, String> usuarios = new HashMap<>();
+//        HashMap<Integer, String> usuarios = new HashMap<>();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try(PreparedStatement ps = conn.prepareStatement(UsuariosQuery)){
             ps.setString(1, CECO);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                usuarios.put(rs.getInt(1), rs.getString(2));
+                usuarios.add(new Usuario(rs.getInt(1), rs.getString(2)));
+//                usuarios.put(rs.getInt(1), rs.getString(2));
             }
 
         } catch (SQLException sqle){
@@ -69,7 +72,7 @@ public class Querier {
     }
 
     public static int cuentaOSporAnio() {
-        String countOSporAnioQuery = "SELECT COUNT(anio) AS cuentaAnio FROM tblOSs WHERE anio = 23"; //La cantidad de anios 23
+        String countOSporAnioQuery = "SELECT COUNT(anio) AS cuentaAnio FROM tblOSsContrastes WHERE anio = 23"; //La cantidad de anios 23
         //SELECT TOP 1 nroOS FROM tblOSs ORDER BY nroOS DESC // El último NroOS
         int OScount = 0;
         try(Statement stmt = conn.createStatement()){

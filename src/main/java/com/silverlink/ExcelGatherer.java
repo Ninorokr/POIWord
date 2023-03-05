@@ -18,11 +18,6 @@ public class ExcelGatherer {
         System.out.println("Escribe la ruta del archivo a extraer");
     }
 
-    /*
-
-
-     */
-
     public void extract(String excelFile){
         ZipSecureFile.setMinInflateRatio(0);
 
@@ -40,10 +35,6 @@ public class ExcelGatherer {
             }
 //            System.out.println("Hoja: \"" + sheet.getSheetName() + "\" | Filas: " + sheet.getLastRowNum());
             organizeData(sheet, scanner);
-
-
-
-
 
         } catch (IOException e){
             System.out.println(e.getMessage());

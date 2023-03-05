@@ -19,13 +19,31 @@ public class Commander {
 
     public static void insertOS(OS os){
 
-        //TODO terminar este query
-        String insertOS = "INSERT INTO tblOSs (idServicio, nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion)" +
-                            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String insertOS = "INSERT INTO tblOSsContrastes (nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion)" +
+                            " VALUES (?, ?, ?, ?, ?, ?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertOS)){
-            ps.setInt(1, os.getIdServicio());
-            ps.setInt(2, cuentaOSporAnio());
+            ps.setInt(1, cuentaOSporAnio() + 1);
+            ps.setString(2, os.getDescripcion());
+            ps.setString(3, os.getIdCECO());
+            ps.setInt(4, os.getIdUsuario());
+            ps.setBoolean(5, os.isEsNTSCE());
+            ps.setBoolean(6, os.isSoloImpresion());
+            ps.execute();
+        } catch(SQLException sqle){
+            System.out.println("No se pudo insertar la OS");
+            sqle.printStackTrace();
+        }
+    }
+
+    public static void insertOSConAnio(OS os){
+
+        String insertOS = "INSERT INTO tblOSsContrastes (anio, nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertOS)){
+            ps.setInt(1, 22);
+            ps.setInt(2, cuentaOSporAnio() + 1);
             ps.setString(3, os.getDescripcion());
             ps.setString(4, os.getIdCECO());
             ps.setInt(5, os.getIdUsuario());
