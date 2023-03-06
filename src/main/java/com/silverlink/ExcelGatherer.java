@@ -20,18 +20,20 @@ public class ExcelGatherer {
     public static void start(){
         ingresarRutaDeArchivo();
         extract(excelFile);
-
     }
 
     public static boolean ingresarRutaDeArchivo(){
+        //TODO ingresar la ruta correctamente la primera vez, sino enviar una linea cualquiera antes de volver a ingresar
         boolean flag = false;
         while(!flag){
             System.out.println("Indicar ruta de archivo:");
+            scanner.nextLine(); //Line handler
             excelFile = scanner.nextLine();
             File file = new File(excelFile);
             flag = file.exists();
             if(!flag){
                 System.out.println("Ruta incorrecta");
+//                scanner.nextLine(); //Line handler
             }
         }
         return flag;
@@ -102,7 +104,7 @@ public class ExcelGatherer {
         int columns = sheet.getRow(0).getLastCellNum();
 
         ArrayList<Integer> choices = new ArrayList<>();
-        for (String campo: campos) {
+        for (String campo : campos) {
             System.out.println("Elige el campo que corresponde a: " + campo);
 
             for(int i = 0; i < columns; i++){

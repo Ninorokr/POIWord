@@ -1,47 +1,27 @@
 package com.silverlink;
 
+import com.silverlink.entities.CECO;
+import com.silverlink.entities.OS;
+import com.silverlink.entities.Usuario;
+import com.silverlink.utils.Datasource;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static com.silverlink.ExcelGatherer.ingresarRutaDeArchivo;
 import static com.silverlink.ExcelGatherer.start;
 import static com.silverlink.queriers.Querier.*;
-import static com.silverlink.queriers.Commander.*;
 
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
 
-    static{
+    static {
         Datasource.open();
     }
 
     public static void main(String[] args){
-
         menuPrincipal(scanner);
-
-//        ResultSet rs = null;
-
-//        try(PreparedStatement ps = conn.prepareStatement("SELECT * FROM tblPlazoEntrega ORDER BY idPlazoEntrega ASC")){
-//            rs = ps.executeQuery();
-//            System.out.println("idPlazoEntrega | nomPlazoEntrega");
-//            while(rs.next()){
-//                System.out.println(rs.getInt(1) + " | " + rs.getString(2));
-//            }
-//
-//        } catch (SQLException sqle){
-//            sqle.printStackTrace();
-//        }
-
-
-//        NTSCE ntsce = new NTSCE();
-//        ntsce.generar();
-
-//        ExcelGatherer eg = new ExcelGatherer();
-//        eg.extract("D:\\Apache POI test\\BVERITAS_AV02-23.xlsx");
-
-
     }
 
     public static void menuPrincipal(Scanner scanner){
@@ -59,9 +39,6 @@ public class Main {
 
     public static void menuIngresarDatos(Scanner scanner){
         ingresarDatosGenerales(scanner);
-
-
-//        revisarListadoDeAvisos(scanner.nextLine());
     }
 
     public static void ingresarDatosGenerales(Scanner scanner){
@@ -178,7 +155,7 @@ public class Main {
         return scanner.nextLine();
     }
 
-    //TODO programar errores y contenciones
+    /*TODO programar errores y contenciones*/
 
 //    private static int elegirServicio(Scanner scanner){
 //        HashMap<Integer, String> servicios = queryServicios();
@@ -203,6 +180,6 @@ public class Main {
         System.out.println("Elegir el usuario:");
         for(int i = 0; i < usuarios.size(); i++)
             System.out.println(i+1 + ". " + /*usuarios.get(i).getIdUsuario() + " | " + */usuarios.get(i).getNomUsuario());
-        return usuarios.get(scanner.nextInt()).getIdUsuario();
+        return usuarios.get(scanner.nextInt()-1).getIdUsuario();
     }
 }

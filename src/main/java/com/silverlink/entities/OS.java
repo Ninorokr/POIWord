@@ -1,4 +1,4 @@
-package com.silverlink;
+package com.silverlink.entities;
 
 import java.sql.Date;
 

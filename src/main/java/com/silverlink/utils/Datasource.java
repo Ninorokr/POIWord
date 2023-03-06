@@ -1,4 +1,4 @@
-package com.silverlink;
+package com.silverlink.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,11 +1,11 @@
 package com.silverlink.queriers;
 
-import com.silverlink.OS;
+import com.silverlink.entities.OS;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static com.silverlink.Datasource.conn;
+import static com.silverlink.utils.Datasource.conn;
 import static com.silverlink.queriers.Querier.cuentaOSporAnio;
 
 public class Commander {

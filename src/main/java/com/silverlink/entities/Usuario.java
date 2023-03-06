@@ -1,4 +1,4 @@
-package com.silverlink;
+package com.silverlink.entities;
 
 public class Usuario {
     private int idUsuario;
