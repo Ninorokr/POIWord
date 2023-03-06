@@ -1,10 +1,11 @@
 package com.silverlink;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static com.silverlink.ExcelGatherer.ingresarRutaDeArchivo;
+import static com.silverlink.ExcelGatherer.start;
 import static com.silverlink.queriers.Querier.*;
 import static com.silverlink.queriers.Commander.*;
 
@@ -70,13 +71,21 @@ public class Main {
         String descripcionOS = descripcionOS(scanner);
         boolean esNTSCE = esNTSCE(scanner);
         boolean soloImpresion = soloImpresion(scanner);
+        boolean esAlterno = esAlterno(scanner);
 
-        OS os = new OS(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion);
+        OS os = new OS(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno);
 
-        insertOS(os);
+        start();
+
+//        crearOS(os);
         //CONFLICTO: Qué pasa si se crea la OS y falla el análisis del Excel, no se puede volver a crear la OS
         //Se tendría que utilizar la OS ya creada, sugerencia: crear un nuevo método que use una OS ya creada.
         //Y asegurar que la OS no esté ocupada
+
+        //POSIBLE SOLUCION: INVERTIR el orden de las tareas
+        //PRIMERO: Dar alguna info sobre la OS en general (esNTSCE, esAlterno, soloImpresion)
+        //SEGUNDO: Analizar los datos del Excel
+        //TERCERO: Ingresar a la BD
     }
 
     public static boolean esNTSCE(Scanner scanner){
@@ -105,6 +114,34 @@ public class Main {
             }
         }
         return esNTSCE;
+    }
+
+    public static boolean esAlterno(Scanner scanner){
+        boolean esAlterno = false;
+        boolean esAlternoFlag = false;
+        int rptaEsAlterno = 0;
+
+        while(!esAlternoFlag){
+            System.out.println("¿Es alterno? 1 = Sí | 2 = No | 9 = Salir");
+            boolean inputFlag2 = false;
+            while(!inputFlag2) {
+                try{
+                    rptaEsAlterno = scanner.nextInt(); //Capturar el nro de rptaNTSCE del usuario
+                } catch (InputMismatchException ime) {
+                    System.out.println("Sólo se aceptan los números 1 y 2");
+                }
+                inputFlag2 = true;
+            }
+
+            switch(rptaEsAlterno){
+                case 1 : esAlterno = true; esAlternoFlag = true; break;
+                case 2 : /*soloImpresion = false;*/ esAlternoFlag = true; break;
+                case 9 : System.exit(0);
+                default:
+                    System.out.println("Valor incorrecto");
+            }
+        }
+        return esAlterno;
     }
 
     public static boolean soloImpresion(Scanner scanner){
@@ -143,13 +180,13 @@ public class Main {
 
     //TODO programar errores y contenciones
 
-    private static int elegirServicio(Scanner scanner){
+//    private static int elegirServicio(Scanner scanner){
 //        HashMap<Integer, String> servicios = queryServicios();
 //        if(servicios.size() == 1) return 1;
 //        System.out.println("Elegir el servicio:");
 //        servicios.forEach((key, value) -> System.out.println(key + ". " + value));
 //        return scanner.nextInt();
-    }
+//    }
 
     public static String elegirCECO(Scanner scanner, int servicio){
         ArrayList<CECO> CECOs = queryCECOsPorServicio(servicio);

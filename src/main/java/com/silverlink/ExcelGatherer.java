@@ -6,19 +6,38 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.silverlink.Main.scanner;
+
 public class ExcelGatherer {
 
-    Scanner scanner = new Scanner(System.in);
+    private static String excelFile;
 
-    public void intro(){
-        System.out.println("Escribe la ruta del archivo a extraer");
+    public static void start(){
+        ingresarRutaDeArchivo();
+        extract(excelFile);
+
     }
 
-    public void extract(String excelFile){
+    public static boolean ingresarRutaDeArchivo(){
+        boolean flag = false;
+        while(!flag){
+            System.out.println("Indicar ruta de archivo:");
+            excelFile = scanner.nextLine();
+            File file = new File(excelFile);
+            flag = file.exists();
+            if(!flag){
+                System.out.println("Ruta incorrecta");
+            }
+        }
+        return flag;
+    }
+
+    public static void extract(String excelFile){
         ZipSecureFile.setMinInflateRatio(0);
 
         try(XSSFWorkbook wb = new XSSFWorkbook(excelFile)){
@@ -45,7 +64,7 @@ public class ExcelGatherer {
     /*
     * En caso de que el excel tenga varias hojas, se preguntará al usuario cual de las hojas contiene la data a extraer
     * */
-    public int chooseSheet(XSSFWorkbook wb, int sheetsQty, Scanner scanner){
+    public static int chooseSheet(XSSFWorkbook wb, int sheetsQty, Scanner scanner){
         //Obtener y mostrar al cliente las hojas de Excel
         XSSFSheet sheet;
         int qty = 0;
@@ -73,7 +92,7 @@ public class ExcelGatherer {
 
     }
 
-    public ArrayList<Integer> organizeData(XSSFSheet sheet, Scanner scanner){
+    public static ArrayList<Integer> organizeData(XSSFSheet sheet, Scanner scanner){
         //Los campos definidos en la base de datos
 //        String[] camposGrales = {"Programado", "Empresa", "Semana"};
         String[] campos = {"Correlativo", "Cliente", "Nombre", "Dirección", "Distrito", "Sucursal", "Sector", "Zona",
@@ -101,7 +120,7 @@ public class ExcelGatherer {
         return choices;
     }
 
-    public String getCellValueAsString(XSSFCell cell){
+    public static String getCellValueAsString(XSSFCell cell){
         CellType type = cell.getCellType();
         try{
             switch(type){

@@ -2,12 +2,14 @@ package com.silverlink;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
+
+import static com.silverlink.Main.scanner;
 
 public class Revisor {
 
-    public static void revisarListadoDeAvisos(String rutaPlantilla){
-        File file = new File(rutaPlantilla);
-        if(!file.exists());
-
+    public static void revisarListadoDeAvisos(boolean esAlterno, boolean esNTSCE){
     }
+
+
 }

@@ -13,14 +13,16 @@ public class OS {
     private int idUsuario;
     private boolean esNTSCE;
     private boolean soloImpresion;
+    private boolean esAlterno;
 
-    public OS(int idServicio, String descripcion, String idCECO, int idUsuario, boolean esNTSCE, boolean soloImpresion) {
+    public OS(int idServicio, String descripcion, String idCECO, int idUsuario, boolean esNTSCE, boolean soloImpresion, boolean esAlterno) {
         this.idServicio = idServicio;
         this.descripcion = descripcion;
         this.idCECO = idCECO;
         this.idUsuario = idUsuario;
         this.esNTSCE = esNTSCE;
         this.soloImpresion = soloImpresion;
+        this.esAlterno = esAlterno;
     }
 
     public int getIdServicio() {
@@ -57,5 +59,9 @@ public class OS {
 
     public boolean isSoloImpresion() {
         return soloImpresion;
+    }
+
+    public boolean isEsAlterno() {
+        return esAlterno;
     }
 }

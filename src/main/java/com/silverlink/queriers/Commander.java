@@ -3,9 +3,7 @@ package com.silverlink.queriers;
 import com.silverlink.OS;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 
 import static com.silverlink.Datasource.conn;
 import static com.silverlink.queriers.Querier.cuentaOSporAnio;
@@ -17,10 +15,10 @@ public class Commander {
     //En cuyo caso, obtener el ultimo nro de OS y sumar 1
     //IMPORTANTE: Nunca se eliminará una OS
 
-    public static void insertOS(OS os){
+    public static void crearOS(OS os){
 
-        String insertOS = "INSERT INTO tblOSsContrastes (nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion)" +
-                            " VALUES (?, ?, ?, ?, ?, ?)";
+        String insertOS = "INSERT INTO tblOSsContrastes (nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno)" +
+                            " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertOS)){
             ps.setInt(1, cuentaOSporAnio() + 1);
@@ -29,6 +27,7 @@ public class Commander {
             ps.setInt(4, os.getIdUsuario());
             ps.setBoolean(5, os.isEsNTSCE());
             ps.setBoolean(6, os.isSoloImpresion());
+            ps.setBoolean(7, os.isEsAlterno());
             ps.execute();
         } catch(SQLException sqle){
             System.out.println("No se pudo insertar la OS");
@@ -36,10 +35,10 @@ public class Commander {
         }
     }
 
-    public static void insertOSConAnio(OS os){
+    public static void crearOSconAnio(OS os){
 
-        String insertOS = "INSERT INTO tblOSsContrastes (anio, nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String insertOS = "INSERT INTO tblOSsContrastes (anio, nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertOS)){
             ps.setInt(1, 22);
@@ -49,6 +48,7 @@ public class Commander {
             ps.setInt(5, os.getIdUsuario());
             ps.setBoolean(6, os.isEsNTSCE());
             ps.setBoolean(7, os.isSoloImpresion());
+            ps.setBoolean(8, os.isEsAlterno());
             ps.execute();
         } catch(SQLException sqle){
             System.out.println("No se pudo insertar la OS");
