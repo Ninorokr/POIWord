@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01f0d091-d1a8-4ec6-88cc-d5f26883c962" name="Changes" comment="Se agregaron metodos de query, nuevas entidades.&#10;Falta algoritmo que pregunte que columnas estan presentes">
+    <list default="true" id="01f0d091-d1a8-4ec6-88cc-d5f26883c962" name="Changes" comment="Se creo nuevas entidades: Distrito, Sucursal y AvisoContraste, se agregaron nuevos metodos de queries,&#10;queda pendiente hacer metodos para descifrar valores del Excel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Distrito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Distrito.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/OS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/OrdenServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Commander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Querier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Querier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,14 +133,7 @@
       <option name="project" value="LOCAL" />
       <updated>1678022781113</updated>
     </task>
-    <task id="LOCAL-00009" summary="Se agregaron metodos de query, nuevas entidades.&#10;Falta algoritmo que pregunte que columnas estan presentes">
-      <created>1678151160238</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1678151160238</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,7 +164,6 @@
     <MESSAGE value="Menu principal" />
     <MESSAGE value="Se agregaron queries al Querier, queda pendiente 2 TODOs" />
     <MESSAGE value="Se agrego query cuentaOSporAnio, se agrego clase Commander para ejecutar ordenes a la BD" />
-    <MESSAGE value="Se agregaron metodos de query, nuevas entidades.&#10;Falta algoritmo que pregunte que columnas estan presentes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agregaron metodos de query, nuevas entidades.&#10;Falta algoritmo que pregunte que columnas estan presentes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se agrego query cuentaOSporAnio, se agrego clase Commander para ejecutar ordenes a la BD" />
   </component>
 </project>

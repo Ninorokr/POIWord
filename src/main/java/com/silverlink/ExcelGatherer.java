@@ -104,24 +104,35 @@ public class ExcelGatherer {
         //Los campos definidos en la base de datos
 //        String[] camposGrales = {"Programado", "Empresa", "Semana"};
         String[] campos = {"Correlativo", "Cliente", "Nombre", "Dirección", "Distrito", "Sucursal", "Sector", "Zona",
-                "Corelativo2", "Promedio", "Latitud", "Longitud", "SET", "Programado", "Marca", "Modelo", "Medidor", "Fase",
-                "Año Fab", "Empresa", "SED", "Semana", "Fecha", "Hora", "Patrón", "Carga", "DNI", "ApellidoTec", "NombreTec"};
+                "Corelativo2", "Promedio", "Latitud", "Longitud", "SET", /*"Programado",*/ "Marca", "Modelo", "Medidor", "Fase",
+                "Año Fab", "Empresa", "SED", /*"Semana",*/ "Fecha", "Hora", "Patrón", "Carga", "DNI", "ApellidoTec", "NombreTec"};
+
+        boolean[] columnasPresentes = new boolean[27];
+        for(boolean columna : columnasPresentes){
+            columna = false;
+        }
 
         int columns = sheet.getRow(0).getLastCellNum();
 
         ArrayList<Integer> choices = new ArrayList<>();
+
+        int k = -1;
         for (String campo : campos) {
+            k++;
             System.out.println("Elige el campo que corresponde a: " + campo);
 
             for(int i = 0; i < columns; i++){
                 if(choices.contains(i))
                     continue;
-                System.out.print(i + ". {");
+                System.out.print(i+1 + ". {");
                 for(int j = 0; j < 4; j++)
                     System.out.print(getCellValueAsString(sheet.getRow(j).getCell(i)) + ", ");
                 System.out.println("...}");
             }
-            choices.add(scanner.nextInt());
+            int choice = scanner.nextInt();
+            choices.add(choice-1);
+            if(choice != 0)
+                columnasPresentes[k] = true;
             System.out.print("\033[H\033[2J");
         }
 
