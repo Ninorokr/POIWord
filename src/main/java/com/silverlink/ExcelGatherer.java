@@ -94,6 +94,12 @@ public class ExcelGatherer {
 
     }
 
+//      1 - Consultar data de la BD
+//      2 - Verificar si existe en la BD
+//          Si existe:
+//          Si NO existe: Ingresar a la tabla correspondiente
+//      3 - Almacenar dato para ingresar junto con todo lo demás
+
     public static ArrayList<Integer> organizeData(XSSFSheet sheet, Scanner scanner){
         //Los campos definidos en la base de datos
 //        String[] camposGrales = {"Programado", "Empresa", "Semana"};

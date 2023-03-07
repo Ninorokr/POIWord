@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01f0d091-d1a8-4ec6-88cc-d5f26883c962" name="Changes" comment="Se agrego query cuentaOSporAnio, se agrego clase Commander para ejecutar ordenes a la BD">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/AvisoContraste.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Distrito.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Sucursal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/EmpresaContrastadora.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Fase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/MarcaMedidor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/ModeloMedidor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/PersonalContrastador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/SET.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/CECO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/CECO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/Datasource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Datasource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/OS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/OS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Commander.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Querier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Querier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Constantes.java" afterDir="false" />
     </list>
