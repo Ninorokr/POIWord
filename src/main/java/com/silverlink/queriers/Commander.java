@@ -1,6 +1,6 @@
 package com.silverlink.queriers;
 
-import com.silverlink.entities.OS;
+import com.silverlink.entities.OrdenServicio;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ public class Commander {
     //En cuyo caso, obtener el ultimo nro de OS y sumar 1
     //IMPORTANTE: Nunca se eliminará una OS
 
-    public static void crearOS(OS os){
+    public static void crearOS(OrdenServicio os){
 
         String insertOS = "INSERT INTO tblOSsContrastes (nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno)" +
                             " VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -35,7 +35,7 @@ public class Commander {
         }
     }
 
-    public static void crearOSconAnio(OS os){
+    public static void crearOSconAnio(OrdenServicio os){
 
         String insertOS = "INSERT INTO tblOSsContrastes (anio, nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno)" +
                 " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

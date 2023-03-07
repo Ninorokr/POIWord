@@ -1,7 +1,7 @@
 package com.silverlink;
 
 import com.silverlink.entities.CECO;
-import com.silverlink.entities.OS;
+import com.silverlink.entities.OrdenServicio;
 import com.silverlink.entities.Usuario;
 import com.silverlink.utils.Datasource;
 
@@ -50,7 +50,7 @@ public class Main {
         boolean soloImpresion = soloImpresion(scanner);
         boolean esAlterno = esAlterno(scanner);
 
-        OS os = new OS(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno);
+        OrdenServicio os = new OrdenServicio(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno);
 
         start();
 

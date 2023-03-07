@@ -2,7 +2,7 @@ package com.silverlink.entities;
 
 import java.sql.Date;
 
-public class OS {
+public class OrdenServicio {
 
     private int idServicio;
     private int anio;
@@ -15,7 +15,7 @@ public class OS {
     private boolean soloImpresion;
     private boolean esAlterno;
 
-    public OS(int idServicio, String descripcion, String idCECO, int idUsuario, boolean esNTSCE, boolean soloImpresion, boolean esAlterno) {
+    public OrdenServicio(int idServicio, String descripcion, String idCECO, int idUsuario, boolean esNTSCE, boolean soloImpresion, boolean esAlterno) {
         this.idServicio = idServicio;
         this.descripcion = descripcion;
         this.idCECO = idCECO;
