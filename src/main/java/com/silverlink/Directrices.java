@@ -1,5 +1,6 @@
 package com.silverlink;
 
+import com.silverlink.entities.AvisoContraste;
 import com.silverlink.entities.OrdenServicio;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
@@ -34,15 +35,14 @@ public class Directrices {
             }
 
             numsColumna.add(scanner.nextInt()-1);
-            if(numsColumna.get(i) != -1)
+//            if(numsColumna.get(i) != -1)
 //                colsPresentes[i] = true;
-            System.out.println("Campo: " + campos[i] + " | Nro. de columna: " + numsColumna.get(i) + " | Presente: ");
+//            System.out.println("Campo: " + campos[i] + " | Nro. de columna: " + numsColumna.get(i) + " | Presente: ");
         }
 
-
-        for (int j = 0; j < campos.length; j++) {
-            System.out.println("Campo: " + campos[j] + " | Nro. de columna: " + numsColumna.get(j) + " | Presente: ");
-        }
+//        for (int j = 0; j < campos.length; j++) {
+//            System.out.println("Campo: " + campos[j] + " | Nro. de columna: " + numsColumna.get(j) + " | Presente: ");
+//        }
     }
 
     private static void printArray(String[] array, int i){
@@ -51,5 +51,13 @@ public class Directrices {
             System.out.print(array[j] + ", ");
         }
         System.out.println();
+    }
+
+    public static void campoCorrelativo(XSSFSheet sheet, OrdenServicio os, AvisoContraste aviso){
+        if(!os.isEsAlterno()){
+
+        } else {
+
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.silverlink;
 
+import com.silverlink.entities.AvisoContraste;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static com.silverlink.Directrices.campos;
 import static com.silverlink.Main.scanner;
 
 public class ExcelGatherer {
@@ -159,6 +161,14 @@ public class ExcelGatherer {
         return null;
     }
 
-    public static
+    public static void recorrerDatos(XSSFSheet sheet){
+        AvisoContraste aviso = new AvisoContraste()
+
+        for(int i = 0; i < campos.length; i++){
+            switch(i){
+                case 0:
+            }
+        }
+    }
 
 }
