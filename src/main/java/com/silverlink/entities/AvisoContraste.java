@@ -30,7 +30,8 @@ public class AvisoContraste {
     private int numMedidor;
     private byte idFase;
     private short anioFab;
-    private Date fechaContraste;
+    private Date fechaContraste1;
+    private Date fechaContraste2; //Los NTSCE tienen fecha2
 
     //Crear columnas y llaves para estos campos
     //Datos adicionales (empresa contrastadora)
@@ -242,12 +243,20 @@ public class AvisoContraste {
         this.anioFab = anioFab;
     }
 
-    public Date getFechaContraste() {
-        return fechaContraste;
+    public Date getFechaContraste1() {
+        return fechaContraste1;
     }
 
-    public void setFechaContraste(Date fechaContraste) {
-        this.fechaContraste = fechaContraste;
+    public void setFechaContraste1(Date fechaContraste) {
+        this.fechaContraste1 = fechaContraste;
+    }
+
+    public Date getFechaContraste2() {
+        return fechaContraste2;
+    }
+
+    public void setFechaContraste2(Date fechaContraste2) {
+        this.fechaContraste2 = fechaContraste2;
     }
 
     //Datos adicionales (empresa contrastadora)

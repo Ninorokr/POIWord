@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01f0d091-d1a8-4ec6-88cc-d5f26883c962" name="Changes" comment="Se creo nuevas entidades: Distrito, Sucursal y AvisoContraste, se agregaron nuevos metodos de queries,&#10;queda pendiente hacer metodos para descifrar valores del Excel">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/Directrices.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/AvisoContraste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/AvisoContraste.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Constantes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Datasource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/utils/Datasource.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678022781113</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Se creo nuevas entidades: Distrito, Sucursal y AvisoContraste, se agregaron nuevos metodos de queries,&#10;queda pendiente hacer metodos para descifrar valores del Excel">
+      <created>1678229704837</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1678229704837</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +175,7 @@
     <MESSAGE value="Menu principal" />
     <MESSAGE value="Se agregaron queries al Querier, queda pendiente 2 TODOs" />
     <MESSAGE value="Se agrego query cuentaOSporAnio, se agrego clase Commander para ejecutar ordenes a la BD" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agrego query cuentaOSporAnio, se agrego clase Commander para ejecutar ordenes a la BD" />
+    <MESSAGE value="Se creo nuevas entidades: Distrito, Sucursal y AvisoContraste, se agregaron nuevos metodos de queries,&#10;queda pendiente hacer metodos para descifrar valores del Excel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se creo nuevas entidades: Distrito, Sucursal y AvisoContraste, se agregaron nuevos metodos de queries,&#10;queda pendiente hacer metodos para descifrar valores del Excel" />
   </component>
 </project>

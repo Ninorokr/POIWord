@@ -55,7 +55,8 @@ public class ExcelGatherer {
                 sheet = wb.getSheetAt(choice);
             }
 //            System.out.println("Hoja: \"" + sheet.getSheetName() + "\" | Filas: " + sheet.getLastRowNum());
-            organizeData(sheet, scanner);
+            Directrices.organizeData(sheet);
+//            organizeData(sheet, scanner);
 
         } catch (IOException e){
             System.out.println(e.getMessage());
@@ -105,9 +106,9 @@ public class ExcelGatherer {
 //        String[] camposGrales = {"Programado", "Empresa", "Semana"};
         String[] campos = {"Correlativo", "Cliente", "Nombre", "Dirección", "Distrito", "Sucursal", "Sector", "Zona",
                 "Corelativo2", "Promedio", "Latitud", "Longitud", "SET", /*"Programado",*/ "Marca", "Modelo", "Medidor", "Fase",
-                "Año Fab", "Empresa", "SED", /*"Semana",*/ "Fecha", "Hora", "Patrón", "Carga", "DNI", "ApellidoTec", "NombreTec"};
+                "Año Fab", "Empresa", "SED", /*"Semana",*/ "Fecha1", "Fecha2", "Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
 
-        boolean[] columnasPresentes = new boolean[27];
+        boolean[] columnasPresentes = new boolean[28];
         for(boolean columna : columnasPresentes){
             columna = false;
         }
@@ -135,7 +136,9 @@ public class ExcelGatherer {
                 columnasPresentes[k] = true;
             System.out.print("\033[H\033[2J");
         }
-
+        for (boolean columna : columnasPresentes) {
+            System.out.print(columna + ", ");
+        }
         return choices;
     }
 
@@ -155,5 +158,7 @@ public class ExcelGatherer {
         }
         return null;
     }
+
+    public static
 
 }

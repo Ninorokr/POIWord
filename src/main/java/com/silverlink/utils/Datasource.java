@@ -4,9 +4,21 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.silverlink.utils.Constantes.connURL;
-
 public class Datasource {
+
+    public static String connURL = "jdbc:sqlserver://192.168.1.2\\SQLS19;" +
+            "database=TEST;" +
+            "user=sa;" +
+            "password=Usuari0LSF;" +
+            "encrypt=true;" +
+            "trustServerCertificate=true;";
+
+//    public static String connURL = "jdbc:sqlserver://SILVERLINK\\SQLEXPRESS;" +
+//            "database=TEST;" +
+//            "user=ninorokr;" +
+//            "password=vecomamak;" +
+//            "encrypt=true;" +
+//            "trustServerCertificate=true;";
 
     public static Connection conn;
 
