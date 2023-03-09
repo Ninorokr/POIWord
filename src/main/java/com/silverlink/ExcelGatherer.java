@@ -4,6 +4,7 @@ import com.silverlink.entities.AvisoContraste;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -161,14 +162,35 @@ public class ExcelGatherer {
         return null;
     }
 
-    public static void recorrerDatos(XSSFSheet sheet){
-        AvisoContraste aviso = new AvisoContraste()
+    public static void recorrerDatos(XSSFSheet sheet, ArrayList<Integer> numsColumna){
+        AvisoContraste aviso = new AvisoContraste();
 
-        for(int i = 0; i < campos.length; i++){
-            switch(i){
-                case 0:
-            }
+//        for (int i = 1; i < sheet.getLastRowNum(); i++) {
+//            XSSFRow row = sheet.getRow(i);
+//            for (int j = 0; j < 28; j++) {
+//                switch(j){
+//                    case 0: aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numsColumna.get(j)))); break;//CORRELATIVO
+//                    case 1:
+//                }
+//            }
+//        }
+
+        String[] campos = {"Promedio", "Latitud", "Longitud", "SET", /*"Programado",*/ "Marca", "Modelo", "Medidor", "Fase",
+                "Año Fab", "Empresa", "SED", /*"Semana",*/ "Fecha1", "Fecha2", "Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
+
+        for (int i = 1; i < sheet.getLastRowNum(); i++) {
+            XSSFRow row = sheet.getRow(i);
+            aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numsColumna.get(0)))); //CORRELATIVO
+            aviso.setNumCliente(getCellValueAsString(row.getCell(numsColumna.get(1)))); //NUM CLIENTE
+            aviso.setNomCliente(getCellValueAsString(row.getCell(numsColumna.get(2)))); //NOM CLIENTE
+            aviso.setDireccion(getCellValueAsString(row.getCell(numsColumna.get(3)))); //DIRECCION
+            aviso.setDistrito(getCellValueAsString(row.getCell(numsColumna.get(4)))); //DISTRITO
+            aviso.setIdSucursal(getCellValueAsString(row.getCell(numsColumna.get(5)))); //SUCURSAL
+            aviso.setNumSector(getCellValueAsString(row.getCell(numsColumna.get(6)))); //SECTOR
+            aviso.setNumZona(getCellValueAsString(row.getCell(numsColumna.get(7)))); //ZONA
+            aviso.setNumCorrelativo2(getCellValueAsString(row.getCell(numsColumna.get(8)))); //CORRELATIVO2
+            aviso.setPromedio(getCellValueAsString(row.getCell(numsColumna.get(9))));
+            //TODO Probar como va funcionando hasta el momento
         }
     }
-
 }

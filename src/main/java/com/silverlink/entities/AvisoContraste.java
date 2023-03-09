@@ -2,6 +2,8 @@ package com.silverlink.entities;
 
 import java.util.Date;
 
+import static com.silverlink.entities.Distrito.descifrarDistrito;
+
 public class AvisoContraste {
 
     //Datos ID
@@ -60,23 +62,18 @@ public class AvisoContraste {
     public short getAnioOS() {
         return anioOS;
     }
-
     public void setAnioOS(short anioOS) {
         this.anioOS = anioOS;
     }
-
     public short getNroOS() {
         return nroOS;
     }
-
     public void setNroOS(short nroOS) {
         this.nroOS = nroOS;
     }
-
     public short getIdAvisoContraste() {
         return idAvisoContraste;
     }
-
     public void setIdAvisoContraste(short idAvisoContraste) {
         this.idAvisoContraste = idAvisoContraste;
     }
@@ -86,81 +83,68 @@ public class AvisoContraste {
     public int getNumCorrelativo() {
         return numCorrelativo;
     }
-
     public void setNumCorrelativo(String numCorrelativoTexto) {
         this.numCorrelativo = Integer.parseInt(numCorrelativoTexto.replaceAll("[^0-9]", ""));
     }
-
     public int getNumCliente() {
         return numCliente;
     }
-
     public void setNumCliente(String numCliente) {
-        this.numCliente = Integer.parseInt(numCliente.replaceAll("[^0-9]", ""));;
+        this.numCliente = Integer.parseInt(numCliente.replaceAll("[^0-9]", ""));
     }
-
     public String getNomCliente() {
         return nomCliente;
     }
-
     public void setNomCliente(String nomCliente) {
         this.nomCliente = nomCliente;
     }
-
     public String getDireccion() {
-        return direccion;
+        return direccion.substring(0, 301);
     }
-
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-
     public Distrito getDistrito() {
         return distrito;
     }
-
-    public void setDistrito(Distrito distrito) {
-        this.distrito = distrito;
+    public void setDistrito(String distrito) {
+        switch(distrito){
+            case "CARMEN DE LA LEGUA": distrito = "Carmen de la Legua Reynoso"; break;
+            case "LURIGANCHO CHOSICA": distrito = "Lurigancho"; break;
+        }
+        this.distrito = descifrarDistrito(distrito);
     }
-
     public short getIdSucursal() {
         return idSucursal;
     }
-
-    public void setIdSucursal(short idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setIdSucursal(String idSucursal) {
+        this.idSucursal = Short.parseShort(idSucursal.replaceAll("[^0-9]", ""));
     }
-
     public short getNumSector() {
         return numSector;
     }
-
-    public void setNumSector(short numSector) {
-        this.numSector = numSector;
+    public void setNumSector(String numSector) {
+        this.numSector = Short.parseShort(numSector.replaceAll("[^0-9]", ""));
     }
-
     public short getNumZona() {
         return numZona;
     }
-
-    public void setNumZona(short numZona) {
-        this.numZona = numZona;
+    public void setNumZona(String numZona) {
+        this.numZona = Short.parseShort(numZona.replaceAll("[^0-9]", ""));
     }
-
     public short getNumCorrelativo2() {
         return numCorrelativo2;
     }
-
-    public void setNumCorrelativo2(short numCorrelativo2) {
-        this.numCorrelativo2 = numCorrelativo2;
+    public void setNumCorrelativo2(String numCorrelativo2) {
+        this.numCorrelativo2 = Short.parseShort(numCorrelativo2.replaceAll("[^0-9]", ""));
     }
 
     public double getPromedio() {
         return promedio;
     }
 
-    public void setPromedio(double promedio) {
-        this.promedio = promedio;
+    public void setPromedio(String promedio) {
+        this.promedio = Double.parseDouble(promedio);
     }
 
     public double getLatitud() {

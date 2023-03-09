@@ -1,24 +1,35 @@
 package com.silverlink;
 
-import com.silverlink.entities.CECO;
-import com.silverlink.entities.OrdenServicio;
-import com.silverlink.entities.Usuario;
+import com.silverlink.entities.*;
 import com.silverlink.utils.Datasource;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.silverlink.ExcelGatherer.start;
 import static com.silverlink.queriers.Querier.*;
+import static com.silverlink.utils.Datasource.conn;
 
 public class Main {
 
-    static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     static {
         Datasource.open();
+
     }
+    public static ArrayList<Distrito> distritos = queryDistritosLimaYCallao();
+    public static ArrayList<Sucursal> sucursales = querySucursales();
+    public static ArrayList<SET> SETs = querySETs();
+    public static ArrayList<MarcaMedidor> marcaMedidores = queryMarcaMedidores();
+    public static ArrayList<ModeloMedidor> modelosMedidor = queryModelosMedidor();
+    public static ArrayList<Fase> fases = queryFases();
+    public static ArrayList<EmpresaContrastadora> empresasContrastadoras =  queryEmpresaContrastadoras();
+    public static ArrayList<PersonalContrastador> personalContrastador = queryPersonalContrastador();
 
     public static void main(String[] args){
         menuPrincipal(scanner);
@@ -38,6 +49,7 @@ public class Main {
     }
 
     public static void menuIngresarDatos(Scanner scanner){
+        System.out.println("Cargando...");
         ingresarDatosGenerales(scanner);
     }
 
@@ -51,6 +63,8 @@ public class Main {
         boolean esAlterno = esAlterno(scanner);
 
         OrdenServicio os = new OrdenServicio(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno);
+
+
 
         start();
 

@@ -13,25 +13,6 @@ import static com.silverlink.utils.Datasource.conn;
 
 public class Querier {
 
-    public static ArrayList<Usuario> queryUsuariosPorCECO(String CECO) {
-        String UsuariosQuery = "SELECT tblCECOsUsuarios.idUsuario, tblUsuarios.nomUsuario FROM tblCECOsUsuarios\n" +
-                "INNER JOIN tblUsuarios ON tblCECOsUsuarios.idUsuario = tblUsuarios.idUsuario\n" +
-                "WHERE idCECO = ?";
-        ArrayList<Usuario> usuarios = new ArrayList<>();
-
-        try (PreparedStatement ps = conn.prepareStatement(UsuariosQuery)) {
-            ps.setString(1, CECO);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                usuarios.add(new Usuario(rs.getInt(1), rs.getString(2)));
-            }
-
-        } catch (SQLException sqle) {
-            System.out.println("No se pudo consultar CECOs");
-        }
-        return usuarios;
-    }
-
     public static ArrayList<CECO> queryCECOsPorServicio(int servicio) {
         String CECOsQuery = "SELECT idCECO, nomCECO FROM tblCECOs\n" +
                 "WHERE idServicio = ?";
@@ -50,7 +31,24 @@ public class Querier {
         }
         return CECOs;
     }
+    public static ArrayList<Usuario> queryUsuariosPorCECO(String CECO) {
+        String UsuariosQuery = "SELECT tblCECOsUsuarios.idUsuario, tblUsuarios.nomUsuario FROM tblCECOsUsuarios\n" +
+                "INNER JOIN tblUsuarios ON tblCECOsUsuarios.idUsuario = tblUsuarios.idUsuario\n" +
+                "WHERE idCECO = ?";
+        ArrayList<Usuario> usuarios = new ArrayList<>();
 
+        try (PreparedStatement ps = conn.prepareStatement(UsuariosQuery)) {
+            ps.setString(1, CECO);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                usuarios.add(new Usuario(rs.getInt(1), rs.getString(2)));
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println("No se pudo consultar CECOs");
+        }
+        return usuarios;
+    }
     public static HashMap<Integer, String> queryServicios() {
         String serviciosQuery = "SELECT idServicio, nomServicio FROM tblServicios;";
         HashMap<Integer, String> servicios = new HashMap<>();
@@ -64,6 +62,23 @@ public class Querier {
             System.out.println("No se pudo consultar servicios");
         }
         return servicios;
+    }
+    //TODO actualizar anio para que sea automático según el año en que se quiere crear la OS
+
+    public static int cuentaOSporAnio() {
+        String countOSporAnioQuery = "SELECT COUNT(anio) AS cuentaAnio FROM tblOSsContrastes WHERE anio = 23"; //La cantidad de anios 23
+        //SELECT TOP 1 nroOS FROM tblOSs ORDER BY nroOS DESC // El último NroOS
+        int OScount = 0;
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(countOSporAnioQuery);
+            while (rs.next())
+                OScount = rs.getInt(1);
+        } catch (SQLException sqle) {
+            System.out.println("No se pudo obtener la cuenta de OS por año");
+            sqle.printStackTrace();
+        }
+        return OScount;
+        //TODO REVISAR, revisar, revisar
     }
 
     public static ArrayList<Distrito> queryAllDistritos() {
@@ -82,22 +97,22 @@ public class Querier {
 
         return distritos;
     }
-
-    //TODO actualizar anio para que sea automático según el año en que se quiere crear la OS
-    public static int cuentaOSporAnio() {
-        String countOSporAnioQuery = "SELECT COUNT(anio) AS cuentaAnio FROM tblOSsContrastes WHERE anio = 23"; //La cantidad de anios 23
-        //SELECT TOP 1 nroOS FROM tblOSs ORDER BY nroOS DESC // El último NroOS
-        int OScount = 0;
-        try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(countOSporAnioQuery);
-            while (rs.next())
-                OScount = rs.getInt(1);
+    public static ArrayList<Distrito> queryDistritosLimaYCallao() {
+        String distritosQuery = "SELECT idPais, idDepartamento, idProvincia, idDistrito, nomDistrito FROM tblDistritos" +
+                                "WHERE (idDepartamento = 7 OR idDepartamento = 15) AND idProvincia = 1";
+        ArrayList<Distrito> distritos = new ArrayList<>();
+        try (PreparedStatement ps = conn.prepareStatement(distritosQuery)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                distritos.add(new Distrito(rs.getByte(1), rs.getByte(2), rs.getByte(3),
+                        rs.getByte(4), rs.getString(5)));
+            }
         } catch (SQLException sqle) {
-            System.out.println("No se pudo obtener la cuenta de OS por año");
+            System.out.println("No se pudo consultar los distritos");
             sqle.printStackTrace();
         }
-        return OScount;
-        //TODO REVISAR, revisar, revisar
+
+        return distritos;
     }
 
     public static ArrayList<Sucursal> querySucursales() {
@@ -114,7 +129,6 @@ public class Querier {
         }
         return sucursales;
     }
-
     public static ArrayList<SET> querySETs() {
         String SETsQuery = "SELECT idSET, codSET, nomSET FROM tblSETs";
         ArrayList<SET> SETs = new ArrayList<>();
@@ -129,7 +143,6 @@ public class Querier {
         }
         return SETs;
     }
-
     public static ArrayList<MarcaMedidor> queryMarcaMedidores() {
         String MarcaMedidoresQuery = "SELECT [idMarcaMedidor], [codMarcaMedidor], [nomMarcaMedidor] FROM [tblMarcasMedidor]";
         ArrayList<MarcaMedidor> MarcaMedidores = new ArrayList<>();
@@ -144,7 +157,6 @@ public class Querier {
         }
         return MarcaMedidores;
     }
-
     public static ArrayList<ModeloMedidor> queryModelosMedidor() {
         String ModelosMedidorQuery = "SELECT [idMarcaMedidor], [idModeloMedidor], [codModeloMedidor] FROM [tblModelosMedidor]";
         ArrayList<ModeloMedidor> ModelosMedidor = new ArrayList<>();
@@ -159,7 +171,6 @@ public class Querier {
         }
         return ModelosMedidor;
     }
-
     public static ArrayList<Fase> queryFases() {
         String fasesQuery = "SELECT [idFase], [codFase], [nomFase] FROM tblFases";
         ArrayList<Fase> fases = new ArrayList<>();
@@ -174,7 +185,6 @@ public class Querier {
         }
         return fases;
     }
-
     public static ArrayList<EmpresaContrastadora> queryEmpresaContrastadoras() {
         String empresasContrastadorasQuery = "SELECT [idEmpresaContrastadora], [nomEmpresaContrastadora], [aliasEmpresaContrastadora] FROM [tblEmpresaContrastadora]";
         ArrayList<EmpresaContrastadora> empresasContrastadoras = new ArrayList<>();
@@ -189,7 +199,6 @@ public class Querier {
         }
         return empresasContrastadoras;
     }
-
     public static ArrayList<PersonalContrastador> queryPersonalContrastador() {
         String personalContrastadorQuery = "SELECT [idEmpresaContrastadora], [idPersonalContrastador]," +
                 " [dniPersonalContrastador], [nomPersonalContrastador], [apePersonalContrastador] FROM [tblEmpresaContrastadora]";

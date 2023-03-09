@@ -54,10 +54,6 @@ public class Directrices {
     }
 
     public static void campoCorrelativo(XSSFSheet sheet, OrdenServicio os, AvisoContraste aviso){
-        if(!os.isEsAlterno()){
 
-        } else {
-
-        }
     }
 }

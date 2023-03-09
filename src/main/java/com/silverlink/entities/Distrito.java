@@ -1,11 +1,14 @@
 package com.silverlink.entities;
 
+import com.silverlink.Main;
+
 import java.text.Normalizer;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.silverlink.queriers.Querier.queryAllDistritos;
+import static com.silverlink.Main.distritos;
+import static com.silverlink.Main.scanner;
 
 public class Distrito implements Comparable<Distrito>{
 
@@ -48,54 +51,44 @@ public class Distrito implements Comparable<Distrito>{
         return this.nomDistrito.compareTo(distrito.getNomDistrito());
     }
 
-//    public static int descifrarDistrito(){
-//        List<Distrito> distritos = queryAllDistritos();
-//
-//        for (Distrito distBD : distritos) {
-//            //Primer intento: Comparar distrito de Excel con distrito de BD
-//            if (distritoExcel.equalsIgnoreCase(distBD.getNomDistrito()))
-//                return distBD.getIdDistrito();
-//
-//            //Segundo intento: Comparar distrito de Excel con distrito de BD sin tildes
-//            String distBDSinTilde = Normalizer.normalize(distBD.getNomDistrito(), Normalizer.Form.NFD);
-//            distBDSinTilde = distBDSinTilde.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-//            if (distritoExcel.equalsIgnoreCase(distBDSinTilde))
-//                return distBD.getIdDistrito();
-//
-//            //Tercer intento: Comparar distrito de Excel sin tildes con distrito de BD sin tildes
-//            String distExcelSinTilde = Normalizer.normalize(distritoExcel, Normalizer.Form.NFD);
-//            distExcelSinTilde = distExcelSinTilde.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
-//            if (distExcelSinTilde.equalsIgnoreCase(distBDSinTilde))
-//                return distBD.getIdDistrito();
-//
-//            //Adicional: Si distrito es "Carmen de la Legua Reynoso"
-//            if (distritoExcel.equalsIgnoreCase("CARMEN DE LA LEGUA"))
-//                return 31;
-//            if (distritoExcel.equalsIgnoreCase("LURIGANCHO CHOSICA"))
-//                return 47;
-//        }
-//
-//
-//        Collections.sort(distritos);
+    public static Distrito descifrarDistrito(String distritoExcel){
+        for (Distrito distBD : distritos) {
+            //Comparar distrito de Excel sin tildes con distrito de BD sin tildes
+            String distBDSinTilde = Normalizer.normalize(distBD.getNomDistrito(), Normalizer.Form.NFD);
+            String distExcelSinTilde = Normalizer.normalize(distritoExcel, Normalizer.Form.NFD);
+            distExcelSinTilde = distExcelSinTilde.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+            if (distExcelSinTilde.equalsIgnoreCase(distBDSinTilde))
+                return distBD;
+        }
+
+        Collections.sort(distritos);
 //        for (Distrito dist : distritos) {
 //            System.out.println(dist);
 //        }
+        for (int i = 0; i < distritos.size(); i++) {
+            System.out.println(i + ". " + distritos.get(i).getNomDistrito());
+        }
 //
 //        Scanner scanner = new Scanner(System.in);
-//        byte numero;
-//
-//        while (true) {
-//            System.out.println("¿Qué distrito es?: " + distritoExcel + ". Elige un número");
-//            if (scanner.hasNextByte()) {
-//                numero = scanner.nextByte();
-//                if (numero > 0 || numero < distritos.size())
-//                    break;
-//                else
-//                    System.out.println("Número fuera de rango.");
-//            } else {
-//                System.out.println("Entrada no válida");
-//            }
-//        }
-//        return numero;
-//    }
+        byte numero;
+
+        while (true) {
+            System.out.println("¿Qué distrito es?: " + distritoExcel + ". Elige un número");
+            if (scanner.hasNextByte()) {
+                numero = scanner.nextByte();
+                if (numero > 0 || numero < distritos.size())
+                    break;
+                else
+                    System.out.println("Número fuera de rango.");
+            } else {
+                System.out.println("Entrada no válida");
+            }
+        }
+        return distritos.get(numero);
+    }
+
+    @Override
+    public String toString() {
+        return this.getIdDepartamento() + " | " + this.getIdDistrito() + ": " + this.getNomDistrito();
+    }
 }
