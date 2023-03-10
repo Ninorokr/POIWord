@@ -1,8 +1,11 @@
 package com.silverlink.entities;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import static com.silverlink.entities.Distrito.descifrarDistrito;
+import static com.silverlink.queriers.Commander.*;
 
 public class AvisoContraste {
 
@@ -24,7 +27,7 @@ public class AvisoContraste {
     private double promedio;
     private double latitud;
     private double longitud;
-    private byte idSET;
+    private short idSET;
     private short numSED;
     private char letraSED;
     private short idMarcaMedidor;
@@ -32,8 +35,8 @@ public class AvisoContraste {
     private int numMedidor;
     private byte idFase;
     private short anioFab;
-    private Date fechaContraste1;
-    private Date fechaContraste2; //Los NTSCE tienen fecha2
+    private LocalDate fechaContraste1;
+    private LocalDate fechaContraste2; //Los NTSCE tienen fecha2
 
     //Crear columnas y llaves para estos campos
     //Datos adicionales (empresa contrastadora)
@@ -47,10 +50,10 @@ public class AvisoContraste {
     private byte idTipoEnvio;
     private double precioAsignado;
     private byte idEstEntrega;
-    private Date fecIngresado;
-    private Date fecAsignado;
+    private LocalDate fecIngresado;
+    private LocalDate fecAsignado;
     private short idPersonal;
-    private Date fecDescargado;
+    private LocalDate fecDescargado;
 
     //se puede enviar datos generales para ayudar con la construccion del objeto
     public AvisoContraste(){
@@ -58,7 +61,6 @@ public class AvisoContraste {
     }
 
     //Datos ID
-
     public short getAnioOS() {
         return anioOS;
     }
@@ -79,7 +81,6 @@ public class AvisoContraste {
     }
 
     //Datos ENEL
-
     public int getNumCorrelativo() {
         return numCorrelativo;
     }
@@ -93,7 +94,7 @@ public class AvisoContraste {
         this.numCliente = Integer.parseInt(numCliente.replaceAll("[^0-9]", ""));
     }
     public String getNomCliente() {
-        return nomCliente;
+        return nomCliente.substring(0, 101);
     }
     public void setNomCliente(String nomCliente) {
         this.nomCliente = nomCliente;
@@ -117,8 +118,19 @@ public class AvisoContraste {
     public short getIdSucursal() {
         return idSucursal;
     }
-    public void setIdSucursal(String idSucursal) {
-        this.idSucursal = Short.parseShort(idSucursal.replaceAll("[^0-9]", ""));
+    public void setIdSucursal(String numSucursalAsString) {
+        short numSucursal = Short.parseShort(numSucursalAsString);
+        boolean flag = true;
+        Sucursal sucursal = null;
+        while(flag){
+            sucursal = Sucursal.existeSucursal(numSucursal);
+            if(sucursal == null){
+                insertSucursalToDB(numSucursal);
+            } else {
+                flag = false;
+            }
+        }
+        this.idSucursal = sucursal.getIdSucursal();
     }
     public short getNumSector() {
         return numSector;
@@ -138,109 +150,126 @@ public class AvisoContraste {
     public void setNumCorrelativo2(String numCorrelativo2) {
         this.numCorrelativo2 = Short.parseShort(numCorrelativo2.replaceAll("[^0-9]", ""));
     }
-
     public double getPromedio() {
         return promedio;
     }
-
     public void setPromedio(String promedio) {
         this.promedio = Double.parseDouble(promedio);
     }
-
     public double getLatitud() {
         return latitud;
     }
-
-    public void setLatitud(double latitud) {
-        this.latitud = latitud;
+    public void setLatitud(String latitud) {
+        this.latitud = Short.parseShort(latitud.replaceAll("[^0-9]", ""));
     }
-
     public double getLongitud() {
         return longitud;
     }
-
-    public void setLongitud(double longitud) {
-        this.longitud = longitud;
+    public void setLongitud(String longitud) {
+        this.longitud = Short.parseShort(longitud.replaceAll("[^0-9]", ""));
     }
-
-    public byte getIdSET() {
+    public short getIdSET() {
         return idSET;
     }
-
-    public void setIdSET(byte idSET) {
-        this.idSET = idSET;
+    public void setIdSET(String codSET) {
+        boolean flag = true;
+        SET set = null;
+        while(flag){
+            set = SET.existeSET(codSET);
+            if(set == null){
+                insertSETToDB(codSET);
+            } else {
+                flag = false;
+            }
+        }
+        this.idSET = set.getIdSET();
     }
-
     public short getNumSED() {
         return numSED;
     }
-
-    public void setNumSED(short numSED) {
-        this.numSED = numSED;
+    public void setNumSEDyLetraSED(String numSED) {
+        this.numSED = Short.parseShort(numSED.replaceAll("[^0-9]", ""));
+        this.letraSED = numSED.charAt(numSED.length()-1);
     }
-
     public char getLetraSED() {
         return letraSED;
     }
-
     public void setLetraSED(char letraSED) {
         this.letraSED = letraSED;
     }
-
     public short getIdMarcaMedidor() {
         return idMarcaMedidor;
     }
-
-    public void setIdMarcaMedidor(short idMarcaMedidor) {
-        this.idMarcaMedidor = idMarcaMedidor;
+    public void setIdMarcaMedidor(String nomMarcaMedidor) {
+        boolean flag = true;
+        MarcaMedidor marcaMedidor = null;
+        while(flag){
+            marcaMedidor = MarcaMedidor.existeMarcaMedidor(nomMarcaMedidor);
+            if(marcaMedidor == null){
+                insertMarcaMedidorToDB(nomMarcaMedidor);
+            } else {
+                flag = false;
+            }
+        }
+        this.idMarcaMedidor = marcaMedidor.getIdMarcaMedidor();
     }
-
     public short getIdModeloMedidor() {
         return idModeloMedidor;
     }
-
-    public void setIdModeloMedidor(short idModeloMedidor) {
-        this.idModeloMedidor = idModeloMedidor;
+    public void setIdModeloMedidor(String nomModeloMedidor) {
+        boolean flag = true;
+        ModeloMedidor modeloMedidor = null;
+        while(flag){
+            modeloMedidor = ModeloMedidor.existeModeloMedidor(nomModeloMedidor);
+            if(modeloMedidor == null){
+                insertModeloMedidorToDB(getIdMarcaMedidor(), nomModeloMedidor);
+            } else {
+                flag = false;
+            }
+        }
+        this.idModeloMedidor = modeloMedidor.getIdModeloMedidor();
     }
-
     public int getNumMedidor() {
         return numMedidor;
     }
-
-    public void setNumMedidor(int numMedidor) {
-        this.numMedidor = numMedidor;
+    public void setNumMedidor(String numMedidor) {
+        this.numMedidor = Short.parseShort(numMedidor.replaceAll("[^0-9]", ""));
     }
-
     public byte getIdFase() {
         return idFase;
     }
-
-    public void setIdFase(byte idFase) {
-        this.idFase = idFase;
+    public void setIdFase(String codFase) {
+        boolean flag = true;
+        Fase fase = null;
+        while(flag){
+            fase = Fase.existeFase(codFase);
+            if(fase == null){
+                insertFaseToDB(codFase);
+            } else {
+                flag = false;
+            }
+        }
+        this.idFase = fase.getIdFase();
     }
-
     public short getAnioFab() {
         return anioFab;
     }
-
-    public void setAnioFab(short anioFab) {
-        this.anioFab = anioFab;
+    public void setAnioFab(String anioFab) {
+        this.anioFab = Short.parseShort(anioFab.replaceAll("[^0-9]", ""));
     }
-
-    public Date getFechaContraste1() {
+    public LocalDate getFechaContraste1() {
         return fechaContraste1;
     }
-
-    public void setFechaContraste1(Date fechaContraste) {
-        this.fechaContraste1 = fechaContraste;
+    public void setFechaContraste1(LocalDate fechaContraste1) {
+        this.fechaContraste1 = fechaContraste1; //TODO definir límites para la fecha a contrastar
     }
 
-    public Date getFechaContraste2() {
+    public LocalDate getFechaContraste2() {
         return fechaContraste2;
     }
 
-    public void setFechaContraste2(Date fechaContraste2) {
-        this.fechaContraste2 = fechaContraste2;
+    public void setFechaContraste2(LocalDate fechaContraste2) {
+        this.fechaContraste2 = fechaContraste2; //TODO definir límites para la fecha a contrastar
     }
 
     //Datos adicionales (empresa contrastadora)
@@ -248,9 +277,18 @@ public class AvisoContraste {
     public byte getIdEmpresaContrastadora() {
         return idEmpresaContrastadora;
     }
-
-    public void setIdEmpresaContrastadora(byte idEmpresaContrastadora) {
-        this.idEmpresaContrastadora = idEmpresaContrastadora;
+    public void setIdEmpresaContrastadora(String aliasEmpContrastadora) {
+        boolean flag = true;
+        EmpresaContrastadora emp = null;
+        while(flag){
+            emp = EmpresaContrastadora.existeEmpresa(aliasEmpContrastadora);
+            if(emp == null){
+                insertEmpresaContrastadoraToDB(aliasEmpContrastadora);
+            } else {
+                flag = false;
+            }
+        }
+        this.idEmpresaContrastadora = emp.getIdEmpContrastadora();
     }
 
     public String getPatron() {
@@ -311,19 +349,19 @@ public class AvisoContraste {
         this.idEstEntrega = idEstEntrega;
     }
 
-    public Date getFecIngresado() {
+    public LocalDate getFecIngresado() {
         return fecIngresado;
     }
 
-    public void setFecIngresado(Date fecIngresado) {
+    public void setFecIngresado(LocalDate fecIngresado) {
         this.fecIngresado = fecIngresado;
     }
 
-    public Date getFecAsignado() {
+    public LocalDate getFecAsignado() {
         return fecAsignado;
     }
 
-    public void setFecAsignado(Date fecAsignado) {
+    public void setFecAsignado(LocalDate fecAsignado) {
         this.fecAsignado = fecAsignado;
     }
 
@@ -335,11 +373,11 @@ public class AvisoContraste {
         this.idPersonal = idPersonal;
     }
 
-    public Date getFecDescargado() {
+    public LocalDate getFecDescargado() {
         return fecDescargado;
     }
 
-    public void setFecDescargado(Date fecDescargado) {
+    public void setFecDescargado(LocalDate fecDescargado) {
         this.fecDescargado = fecDescargado;
     }
 

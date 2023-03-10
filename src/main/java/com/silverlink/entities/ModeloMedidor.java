@@ -1,14 +1,17 @@
 package com.silverlink.entities;
 
+import static com.silverlink.Main.marcaMedidores;
+import static com.silverlink.Main.modelosMedidor;
+
 public class ModeloMedidor {
     private short idMarcaMedidor;
     private short idModeloMedidor;
-    private String codModeloMedidor;
+    private String nomModeloMedidor;
 
-    public ModeloMedidor(short idMarcaMedidor, short idModeloMedidor, String codModeloMedidor) {
+    public ModeloMedidor(short idMarcaMedidor, short idModeloMedidor, String nomModeloMedidor) {
         this.idMarcaMedidor = idMarcaMedidor;
         this.idModeloMedidor = idModeloMedidor;
-        this.codModeloMedidor = codModeloMedidor;
+        this.nomModeloMedidor = nomModeloMedidor;
     }
 
     public short getIdMarcaMedidor() {
@@ -27,11 +30,19 @@ public class ModeloMedidor {
         this.idModeloMedidor = idModeloMedidor;
     }
 
-    public String getCodModeloMedidor() {
-        return codModeloMedidor;
+    public String getNomModeloMedidor() {
+        return nomModeloMedidor;
     }
 
-    public void setCodModeloMedidor(String codModeloMedidor) {
-        this.codModeloMedidor = codModeloMedidor;
+    public void setNomModeloMedidor(String nomModeloMedidor) {
+        this.nomModeloMedidor = nomModeloMedidor;
+    }
+
+    public static ModeloMedidor existeModeloMedidor(String nomModeloMedidor){
+        for(ModeloMedidor modelo : modelosMedidor){
+            if(modelo.getNomModeloMedidor().equals(nomModeloMedidor))
+                return modelo;
+        }
+        return null;
     }
 }

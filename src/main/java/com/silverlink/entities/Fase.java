@@ -1,38 +1,44 @@
 package com.silverlink.entities;
 
+import static com.silverlink.Main.fases;
+import static com.silverlink.Main.modelosMedidor;
+
 public class Fase {
 
-    private short idFase;
+    private byte idFase;
     private String codFase;
     private String nomFase;
 
-    public Fase(short idFase, String codFase, String nomFase) {
+    public Fase(byte idFase, String codFase, String nomFase) {
         this.idFase = idFase;
         this.codFase = codFase;
         this.nomFase = nomFase;
     }
 
-    public short getIdFase() {
+    public byte getIdFase() {
         return idFase;
     }
-
-    public void setIdFase(short idFase) {
+    public void setIdFase(byte idFase) {
         this.idFase = idFase;
     }
-
     public String getCodFase() {
         return codFase;
     }
-
     public void setCodFase(String codFase) {
         this.codFase = codFase;
     }
-
     public String getNomFase() {
         return nomFase;
     }
-
     public void setNomFase(String nomFase) {
         this.nomFase = nomFase;
+    }
+
+    public static Fase existeFase(String codFase){
+        for(Fase fase : fases){
+            if(fase.getNomFase().equals(codFase))
+                return fase;
+        }
+        return null;
     }
 }

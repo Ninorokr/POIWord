@@ -10,10 +10,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static com.silverlink.Directrices.campos;
 import static com.silverlink.Main.scanner;
 
 public class ExcelGatherer {
@@ -108,8 +108,8 @@ public class ExcelGatherer {
         //Los campos definidos en la base de datos
 //        String[] camposGrales = {"Programado", "Empresa", "Semana"};
         String[] campos = {"Correlativo", "Cliente", "Nombre", "Dirección", "Distrito", "Sucursal", "Sector", "Zona",
-                "Corelativo2", "Promedio", "Latitud", "Longitud", "SET", /*"Programado",*/ "Marca", "Modelo", "Medidor", "Fase",
-                "Año Fab", "Empresa", "SED", /*"Semana",*/ "Fecha1", "Fecha2", "Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
+                "Corelativo2", "Promedio", "Latitud", "Longitud", "SET", "SED", /*"Programado",*/ "Marca", "Modelo", "Medidor", "Fase",
+                "Año Fab", "Empresa", /*"Semana",*/ "Fecha1", "Fecha2", "Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
 
         boolean[] columnasPresentes = new boolean[28];
         for(boolean columna : columnasPresentes){
@@ -175,8 +175,7 @@ public class ExcelGatherer {
 //            }
 //        }
 
-        String[] campos = {"Promedio", "Latitud", "Longitud", "SET", /*"Programado",*/ "Marca", "Modelo", "Medidor", "Fase",
-                "Año Fab", "Empresa", "SED", /*"Semana",*/ "Fecha1", "Fecha2", "Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
+        String[] campos = {"Empresa", "Fecha1", "Fecha2", "Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
 
         for (int i = 1; i < sheet.getLastRowNum(); i++) {
             XSSFRow row = sheet.getRow(i);
@@ -190,6 +189,17 @@ public class ExcelGatherer {
             aviso.setNumZona(getCellValueAsString(row.getCell(numsColumna.get(7)))); //ZONA
             aviso.setNumCorrelativo2(getCellValueAsString(row.getCell(numsColumna.get(8)))); //CORRELATIVO2
             aviso.setPromedio(getCellValueAsString(row.getCell(numsColumna.get(9))));
+            aviso.setLatitud(getCellValueAsString(row.getCell(numsColumna.get(10))));
+            aviso.setIdSET(getCellValueAsString(row.getCell(numsColumna.get(11))));
+            aviso.setNumSEDyLetraSED(getCellValueAsString(row.getCell(numsColumna.get(12))));
+            aviso.setIdMarcaMedidor(getCellValueAsString(row.getCell(numsColumna.get(13))));
+            aviso.setIdModeloMedidor(getCellValueAsString(row.getCell(numsColumna.get(14))));
+            aviso.setNumMedidor(getCellValueAsString(row.getCell(numsColumna.get(15))));
+            aviso.setIdFase(getCellValueAsString(row.getCell(numsColumna.get(16))));
+            aviso.setAnioFab(getCellValueAsString(row.getCell(numsColumna.get(17))));
+            aviso.setIdEmpresaContrastadora(getCellValueAsString(row.getCell(numsColumna.get(18))));
+            aviso.setFechaContraste1(LocalDate.from(row.getCell(numsColumna.get(19)).getLocalDateTimeCellValue()));
+            aviso.setAnioFab(getCellValueAsString(row.getCell(numsColumna.get(20))));
             //TODO Probar como va funcionando hasta el momento
         }
     }

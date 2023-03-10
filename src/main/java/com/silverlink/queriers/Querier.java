@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.Normalizer;
 import java.util.*;
 
 import static com.silverlink.utils.Datasource.conn;
@@ -111,10 +110,8 @@ public class Querier {
             System.out.println("No se pudo consultar los distritos");
             sqle.printStackTrace();
         }
-
         return distritos;
     }
-
     public static ArrayList<Sucursal> querySucursales() {
         String sucursalesQuery = "SELECT idSucursal, nomSucursal FROM tblSucursales";
         ArrayList<Sucursal> sucursales = new ArrayList<>();
@@ -177,7 +174,7 @@ public class Querier {
         try (PreparedStatement ps = conn.prepareStatement(fasesQuery)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                fases.add(new Fase(rs.getShort(1), rs.getString(2), rs.getString(3)));
+                fases.add(new Fase(rs.getByte(1), rs.getString(2), rs.getString(3)));
             }
         } catch (SQLException sqle) {
             System.out.println("No se pudo consultar las fases");
@@ -185,13 +182,13 @@ public class Querier {
         }
         return fases;
     }
-    public static ArrayList<EmpresaContrastadora> queryEmpresaContrastadoras() {
+    public static ArrayList<EmpresaContrastadora> queryEmpresasContrastadoras() {
         String empresasContrastadorasQuery = "SELECT [idEmpresaContrastadora], [nomEmpresaContrastadora], [aliasEmpresaContrastadora] FROM [tblEmpresaContrastadora]";
         ArrayList<EmpresaContrastadora> empresasContrastadoras = new ArrayList<>();
         try (PreparedStatement ps = conn.prepareStatement(empresasContrastadorasQuery)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                empresasContrastadoras.add(new EmpresaContrastadora(rs.getShort(1), rs.getString(2), rs.getString(3)));
+                empresasContrastadoras.add(new EmpresaContrastadora(rs.getByte(1), rs.getString(2), rs.getString(3)));
             }
         } catch (SQLException sqle) {
             System.out.println("No se pudo consultar las empresas contrastadoras");

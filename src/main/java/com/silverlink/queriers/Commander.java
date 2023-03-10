@@ -5,8 +5,9 @@ import com.silverlink.entities.OrdenServicio;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import static com.silverlink.Main.*;
+import static com.silverlink.queriers.Querier.*;
 import static com.silverlink.utils.Datasource.conn;
-import static com.silverlink.queriers.Querier.cuentaOSporAnio;
 
 public class Commander {
 
@@ -55,4 +56,83 @@ public class Commander {
             sqle.printStackTrace();
         }
     }
+
+    public static void insertSucursalToDB(short numSucursal){
+        String insertSucursalQuery = "INSERT INTO tblSucursales (numSucursal) VALUES ?";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertSucursalQuery)){
+            ps.setShort(1, numSucursal);
+            ps.execute();
+        } catch (SQLException sqle){
+            System.out.println("No se pudo ingresar la sucursal a la BD");
+        }
+        System.out.println("Se insertó nueva sucursal: " + numSucursal);
+        sucursales = querySucursales();
+    }
+    public static void insertSETToDB(String codSET){
+        String insertSETQuery = "INSERT INTO tblSETs (codSET) VALUES ?";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertSETQuery)){
+            ps.setString(1, codSET);
+            ps.execute();
+        } catch (SQLException sqle){
+            System.out.println("No se pudo ingresar la SET a la BD");
+        }
+        System.out.println("Se insertó nueva SET: " + codSET);
+        SETs = querySETs();
+    }
+    public static void insertMarcaMedidorToDB(String nomMarcaMedidor){
+        String insertMarcaMedidorQuery = "INSERT INTO tblMarcasMedidor (codMarcaMedidor) VALUES ?";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertMarcaMedidorQuery)){
+            ps.setString(1, nomMarcaMedidor);
+            ps.execute();
+        } catch (SQLException sqle){
+            System.out.println("No se pudo ingresar la marca de medidor a la BD");
+        }
+        System.out.println("Se insertó la nueva marca de medidor: " + nomMarcaMedidor);
+
+        marcaMedidores = queryMarcaMedidores();
+    }
+    public static void insertModeloMedidorToDB(short IdMarcaMedidor, String nomModeloMedidor){
+        String insertModeloMedidorQuery = "INSERT INTO tblModelosMedidor (idMarcaMedidor, nomModeloMedidor) VALUES ?, ?";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertModeloMedidorQuery)){
+            ps.setShort(1, IdMarcaMedidor);
+            ps.setString(2, nomModeloMedidor);
+            ps.execute();
+        } catch (SQLException sqle){
+            System.out.println("No se pudo ingresar el modelo de medidor a la BD");
+        }
+        System.out.println("Se insertó el nuevo modelo de medidor: " + nomModeloMedidor);
+
+        marcaMedidores = queryMarcaMedidores();
+    }
+    public static void insertFaseToDB(String codFase){
+        String insertFase = "INSERT INTO tblFases (nomFase) VALUES ?";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertFase)){
+            ps.setString(1, codFase);
+            ps.execute();
+        } catch (SQLException sqle){
+            System.out.println("No se pudo ingresar la fase a la BD");
+        }
+        System.out.println("Se insertó la nueva fase: " + codFase);
+
+        fases = queryFases();
+    }
+    public static void insertEmpresaContrastadoraToDB(String aliasEmp){
+        String insertEmpContrastadora = "INSERT INTO tblEmpresasContrastadoras (aliasEmpresaContrastadora) VALUES ?";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertEmpContrastadora)){
+            ps.setString(1, aliasEmp);
+            ps.execute();
+        } catch (SQLException sqle){
+            System.out.println("No se pudo ingresar la empresa contrastadora a la BD");
+        }
+        System.out.println("Se insertó la nueva empresa contrastadora: " + aliasEmp);
+
+        empresasContrastadoras = queryEmpresasContrastadoras();
+    }
+
 }

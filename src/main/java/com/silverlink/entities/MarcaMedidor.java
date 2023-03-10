@@ -1,5 +1,8 @@
 package com.silverlink.entities;
 
+import static com.silverlink.Main.SETs;
+import static com.silverlink.Main.marcaMedidores;
+
 public class MarcaMedidor {
 
     private short idMarcaMedidor;
@@ -34,5 +37,13 @@ public class MarcaMedidor {
 
     public void setNomMarcaMedidor(String nomMarcaMedidor) {
         this.nomMarcaMedidor = nomMarcaMedidor;
+    }
+
+    public static MarcaMedidor existeMarcaMedidor(String nomMarcaMedidor){
+        for(MarcaMedidor marca : marcaMedidores){
+            if(marca.getNomMarcaMedidor().equals(nomMarcaMedidor))
+                return marca;
+        }
+        return null;
     }
 }

@@ -3,16 +3,12 @@ package com.silverlink;
 import com.silverlink.entities.*;
 import com.silverlink.utils.Datasource;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static com.silverlink.ExcelGatherer.start;
 import static com.silverlink.queriers.Querier.*;
-import static com.silverlink.utils.Datasource.conn;
 
 public class Main {
 
@@ -28,7 +24,7 @@ public class Main {
     public static ArrayList<MarcaMedidor> marcaMedidores = queryMarcaMedidores();
     public static ArrayList<ModeloMedidor> modelosMedidor = queryModelosMedidor();
     public static ArrayList<Fase> fases = queryFases();
-    public static ArrayList<EmpresaContrastadora> empresasContrastadoras =  queryEmpresaContrastadoras();
+    public static ArrayList<EmpresaContrastadora> empresasContrastadoras =  queryEmpresasContrastadoras();
     public static ArrayList<PersonalContrastador> personalContrastador = queryPersonalContrastador();
 
     public static void main(String[] args){

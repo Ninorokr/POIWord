@@ -1,5 +1,7 @@
 package com.silverlink.entities;
 
+import static com.silverlink.Main.SETs;
+
 public class SET {
     private short idSET;
     private String codSET;
@@ -34,4 +36,13 @@ public class SET {
     public void setNomSET(String nomSET) {
         this.nomSET = nomSET;
     }
+
+    public static SET existeSET(String codSET){
+        for(SET set : SETs){
+            if(set.getNomSET().equals(codSET))
+                return set;
+        }
+        return null;
+    }
+
 }

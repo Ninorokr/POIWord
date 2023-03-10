@@ -1,20 +1,22 @@
 package com.silverlink.entities;
 
-//TODO Crear tabla sucursal en la BD
+import static com.silverlink.Main.sucursales;
+
+
 public class Sucursal {
-    private int idSucursal;
+    private short idSucursal;
     private short numSucursal;
 
-    public Sucursal(int idSucursal, short numSucursal) {
+    public Sucursal(short idSucursal, short numSucursal) {
         this.idSucursal = idSucursal;
         this.numSucursal = numSucursal;
     }
 
-    public int getIdSucursal() {
+    public short getIdSucursal() {
         return idSucursal;
     }
 
-    public void setIdSucursal(int idSucursal) {
+    public void setIdSucursal(short idSucursal) {
         this.idSucursal = idSucursal;
     }
 
@@ -24,5 +26,13 @@ public class Sucursal {
 
     public void setNumSucursal(short numSucursal) {
         this.numSucursal = numSucursal;
+    }
+
+    public static Sucursal existeSucursal(short numSucursalAsString){
+        for(Sucursal sucursal : sucursales){
+            if(sucursal.getNumSucursal() == numSucursalAsString)
+                return sucursal;
+        }
+        return null;
     }
 }
