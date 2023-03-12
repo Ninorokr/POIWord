@@ -29,19 +29,15 @@ public class Distrito implements Comparable<Distrito>{
     public int getIdPais() {
         return idPais;
     }
-
     public int getIdDepartamento() {
         return idDepartamento;
     }
-
     public int getIdProvincia() {
         return idProvincia;
     }
-
     public int getIdDistrito() {
         return idDistrito;
     }
-
     public String getNomDistrito() {
         return nomDistrito;
     }

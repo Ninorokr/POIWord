@@ -25,7 +25,7 @@ public class Main {
     public static ArrayList<ModeloMedidor> modelosMedidor = queryModelosMedidor();
     public static ArrayList<Fase> fases = queryFases();
     public static ArrayList<EmpresaContrastadora> empresasContrastadoras =  queryEmpresasContrastadoras();
-    public static ArrayList<PersonalContrastador> personalContrastador = queryPersonalContrastador();
+    public static ArrayList<PersonalContrastador> listaPersonalContrastador = queryPersonalContrastador();
 
     public static void main(String[] args){
         menuPrincipal(scanner);

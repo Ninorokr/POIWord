@@ -17,23 +17,18 @@ public class ModeloMedidor {
     public short getIdMarcaMedidor() {
         return idMarcaMedidor;
     }
-
     public void setIdMarcaMedidor(short idMarcaMedidor) {
         this.idMarcaMedidor = idMarcaMedidor;
     }
-
     public short getIdModeloMedidor() {
         return idModeloMedidor;
     }
-
     public void setIdModeloMedidor(short idModeloMedidor) {
         this.idModeloMedidor = idModeloMedidor;
     }
-
     public String getNomModeloMedidor() {
         return nomModeloMedidor;
     }
-
     public void setNomModeloMedidor(String nomModeloMedidor) {
         this.nomModeloMedidor = nomModeloMedidor;
     }

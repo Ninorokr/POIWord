@@ -1,9 +1,12 @@
 package com.silverlink.entities;
 
+import net.sourceforge.barbecue.output.SizingOutput;
+
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+import static com.silverlink.Main.*;
 import static com.silverlink.entities.Distrito.descifrarDistrito;
 import static com.silverlink.queriers.Commander.*;
 
@@ -43,7 +46,7 @@ public class AvisoContraste {
     private byte idEmpresaContrastadora;
     private String patron;
     private String carga;
-    private int idPersonalContrastador;
+    private PersonalContrastador personalContrastador;
 
     //Datos operativos
     private byte idPlazoEntrega;
@@ -244,7 +247,10 @@ public class AvisoContraste {
         while(flag){
             fase = Fase.existeFase(codFase);
             if(fase == null){
-                insertFaseToDB(codFase);
+                System.out.println("¿Qué fase es " + codFase + "?");
+                for(Fase fase2 : fases){System.out.println(fase2);}
+                byte idFase = scanner.nextByte();
+                fases.add(new Fase(idFase, codFase, ""));
             } else {
                 flag = false;
             }
@@ -283,7 +289,10 @@ public class AvisoContraste {
         while(flag){
             emp = EmpresaContrastadora.existeEmpresa(aliasEmpContrastadora);
             if(emp == null){
-                insertEmpresaContrastadoraToDB(aliasEmpContrastadora);
+                System.out.println("¿Qué empresa contrastadora es " + aliasEmpContrastadora + "?");
+                for(EmpresaContrastadora empCon : empresasContrastadoras){System.out.println(empCon);}
+                byte numEmpContrastadora = scanner.nextByte();
+                empresasContrastadoras.add(new EmpresaContrastadora(numEmpContrastadora, "", aliasEmpContrastadora));
             } else {
                 flag = false;
             }
@@ -294,25 +303,32 @@ public class AvisoContraste {
     public String getPatron() {
         return patron;
     }
-
     public void setPatron(String patron) {
         this.patron = patron;
     }
-
     public String getCarga() {
         return carga;
     }
-
     public void setCarga(String carga) {
         this.carga = carga;
     }
-
-    public int getIdPersonalContrastador() {
-        return idPersonalContrastador;
+    public PersonalContrastador getPersonalContrastador() {
+        return PersonalContrastador;
     }
-
-    public void setIdPersonalContrastador(int idPersonalContrastador) {
-        this.idPersonalContrastador = idPersonalContrastador;
+    public void setPersonalContrastador(String dni, String nombre, String apellido){
+        int dniPersonalContrastador = Integer.parseInt(dni);
+        boolean flag = true;
+        PersonalContrastador personal = null;
+        while(flag){
+            personal = PersonalContrastador.existePersonalContrastador(dni);
+            if(personal == null){
+                insertPersonalContrastadorToDB(getIdEmpresaContrastadora(), personal.getDniPersonalContrastador(),
+                        personal.getNomPersonalContrastador(), personal.getApePersonalContrastador());
+            } else {
+                flag = false;
+            }
+        }
+        this.personalContrastador = ;
     }
 
     //Datos operativos

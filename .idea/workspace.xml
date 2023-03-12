@@ -9,14 +9,12 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/ExcelGatherer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/AvisoContraste.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/AvisoContraste.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/CECO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/CECO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Distrito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Distrito.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/EmpresaContrastadora.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/EmpresaContrastadora.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Fase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Fase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/MarcaMedidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/MarcaMedidor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/ModeloMedidor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/ModeloMedidor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/SET.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/SET.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Sucursal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/Sucursal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/PersonalContrastador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/entities/PersonalContrastador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Commander.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Commander.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Querier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/silverlink/queriers/Querier.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

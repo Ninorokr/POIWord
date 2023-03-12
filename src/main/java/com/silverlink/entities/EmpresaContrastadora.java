@@ -39,4 +39,9 @@ public class EmpresaContrastadora {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return this.getIdEmpContrastadora() + " | " + this.getNomEmpContrastadora() + ": " + this.getAliasEmpContrastadora();
+    }
 }

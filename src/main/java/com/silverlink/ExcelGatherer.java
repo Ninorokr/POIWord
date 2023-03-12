@@ -1,6 +1,7 @@
 package com.silverlink;
 
 import com.silverlink.entities.AvisoContraste;
+import com.silverlink.entities.PersonalContrastador;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -175,32 +176,39 @@ public class ExcelGatherer {
 //            }
 //        }
 
-        String[] campos = {"Empresa", "Fecha1", "Fecha2", "Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
+        String[] campos = {"Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
 
         for (int i = 1; i < sheet.getLastRowNum(); i++) {
             XSSFRow row = sheet.getRow(i);
-            aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numsColumna.get(0)))); //CORRELATIVO
-            aviso.setNumCliente(getCellValueAsString(row.getCell(numsColumna.get(1)))); //NUM CLIENTE
-            aviso.setNomCliente(getCellValueAsString(row.getCell(numsColumna.get(2)))); //NOM CLIENTE
-            aviso.setDireccion(getCellValueAsString(row.getCell(numsColumna.get(3)))); //DIRECCION
-            aviso.setDistrito(getCellValueAsString(row.getCell(numsColumna.get(4)))); //DISTRITO
-            aviso.setIdSucursal(getCellValueAsString(row.getCell(numsColumna.get(5)))); //SUCURSAL
-            aviso.setNumSector(getCellValueAsString(row.getCell(numsColumna.get(6)))); //SECTOR
-            aviso.setNumZona(getCellValueAsString(row.getCell(numsColumna.get(7)))); //ZONA
-            aviso.setNumCorrelativo2(getCellValueAsString(row.getCell(numsColumna.get(8)))); //CORRELATIVO2
+            aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numsColumna.get(0))));
+            aviso.setNumCliente(getCellValueAsString(row.getCell(numsColumna.get(1))));
+            aviso.setNomCliente(getCellValueAsString(row.getCell(numsColumna.get(2))));
+            aviso.setDireccion(getCellValueAsString(row.getCell(numsColumna.get(3))));
+            aviso.setDistrito(getCellValueAsString(row.getCell(numsColumna.get(4))));
+            aviso.setIdSucursal(getCellValueAsString(row.getCell(numsColumna.get(5))));
+            aviso.setNumSector(getCellValueAsString(row.getCell(numsColumna.get(6))));
+            aviso.setNumZona(getCellValueAsString(row.getCell(numsColumna.get(7))));
+            aviso.setNumCorrelativo2(getCellValueAsString(row.getCell(numsColumna.get(8))));
             aviso.setPromedio(getCellValueAsString(row.getCell(numsColumna.get(9))));
             aviso.setLatitud(getCellValueAsString(row.getCell(numsColumna.get(10))));
-            aviso.setIdSET(getCellValueAsString(row.getCell(numsColumna.get(11))));
-            aviso.setNumSEDyLetraSED(getCellValueAsString(row.getCell(numsColumna.get(12))));
-            aviso.setIdMarcaMedidor(getCellValueAsString(row.getCell(numsColumna.get(13))));
-            aviso.setIdModeloMedidor(getCellValueAsString(row.getCell(numsColumna.get(14))));
-            aviso.setNumMedidor(getCellValueAsString(row.getCell(numsColumna.get(15))));
-            aviso.setIdFase(getCellValueAsString(row.getCell(numsColumna.get(16))));
-            aviso.setAnioFab(getCellValueAsString(row.getCell(numsColumna.get(17))));
-            aviso.setIdEmpresaContrastadora(getCellValueAsString(row.getCell(numsColumna.get(18))));
-            aviso.setFechaContraste1(LocalDate.from(row.getCell(numsColumna.get(19)).getLocalDateTimeCellValue()));
-            aviso.setAnioFab(getCellValueAsString(row.getCell(numsColumna.get(20))));
-            //TODO Probar como va funcionando hasta el momento
+            aviso.setLongitud(getCellValueAsString(row.getCell(numsColumna.get(11))));
+            aviso.setIdSET(getCellValueAsString(row.getCell(numsColumna.get(12))));
+            aviso.setNumSEDyLetraSED(getCellValueAsString(row.getCell(numsColumna.get(13))));
+            aviso.setIdMarcaMedidor(getCellValueAsString(row.getCell(numsColumna.get(14))));
+            aviso.setIdModeloMedidor(getCellValueAsString(row.getCell(numsColumna.get(15))));
+            aviso.setNumMedidor(getCellValueAsString(row.getCell(numsColumna.get(16))));
+            aviso.setIdFase(getCellValueAsString(row.getCell(numsColumna.get(17))));
+            aviso.setAnioFab(getCellValueAsString(row.getCell(numsColumna.get(18))));
+            aviso.setIdEmpresaContrastadora(getCellValueAsString(row.getCell(numsColumna.get(19))));
+            aviso.setFechaContraste1(LocalDate.from(row.getCell(numsColumna.get(20)).getLocalDateTimeCellValue()));
+            aviso.setFechaContraste2(LocalDate.from(row.getCell(numsColumna.get(21)).getLocalDateTimeCellValue()));
+            aviso.setHora(getCellValueAsString(row.getCell(numsColumna.get(22))));
+            aviso.setPatron(getCellValueAsString(row.getCell(numsColumna.get(23))));
+            aviso.setCarga(getCellValueAsString(row.getCell(numsColumna.get(24))));
+            aviso.setPersonalContrastador(getCellValueAsString(row.getCell(numsColumna.get(25))),
+                            getCellValueAsString(row.getCell(numsColumna.get(26))),
+                            getCellValueAsString(row.getCell(numsColumna.get(27))));
+            //TODO Si el valor de numsColumna es -1, que el valor sea null y se almacene en la BD como null
         }
     }
 }

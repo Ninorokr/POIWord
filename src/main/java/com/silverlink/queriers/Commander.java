@@ -1,6 +1,7 @@
 package com.silverlink.queriers;
 
 import com.silverlink.entities.OrdenServicio;
+import com.silverlink.entities.PersonalContrastador;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -134,5 +135,24 @@ public class Commander {
 
         empresasContrastadoras = queryEmpresasContrastadoras();
     }
+    public static void insertPersonalContrastadorToDB(byte idEmpresaContrastadora, int dni, String nombre, String apellido){
+        PersonalContrastador persCont = new PersonalContrastador(idEmpresaContrastadora, dni, nombre, apellido);
+        String insertPersCont = "INSERT INTO tblPersonalContrastador(idEmpresaContrastadora, dniPersonalContrastador," +
+                "nomPersonalContrastador, apePersonalContrastador) VALUES ?, ?, ?, ?";
+
+        try(PreparedStatement ps = conn.prepareStatement(insertPersCont)){
+            ps.setByte(1, idEmpresaContrastadora);
+            ps.setInt(2, dni);
+            ps.setString(3, nombre);
+            ps.setString(4, apellido);
+            ps.execute();
+        } catch (SQLException sqle){
+            System.out.println("No se pudo ingresar al personal contrastador a la BD");
+        }
+        System.out.println("Se insertó al nuevo personal contrastador: " + persCont);
+
+        listaPersonalContrastador = queryPersonalContrastador();
+    }
+
 
 }

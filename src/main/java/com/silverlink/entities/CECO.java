@@ -15,11 +15,9 @@ public class CECO {
     public int getIdServicio() {
         return idServicio;
     }
-
     public String getIdCECO() {
         return idCECO;
     }
-
     public String getNomCECO() {
         return nomCECO;
     }
