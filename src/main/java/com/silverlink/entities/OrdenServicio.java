@@ -28,40 +28,31 @@ public class OrdenServicio {
     public int getIdServicio() {
         return idServicio;
     }
-
     public int getAnio() {
         return anio;
     }
-
     public int getNroOS() {
         return nroOS;
     }
-
     public Date getFechaOS() {
         return fechaOS;
     }
-
     public String getDescripcion() {
         return descripcion;
     }
-
     public String getIdCECO() {
         return idCECO;
     }
-
     public int getIdUsuario() {
         return idUsuario;
     }
-
-    public boolean isEsNTSCE() {
+    public boolean esNTSCE() {
         return esNTSCE;
     }
-
     public boolean isSoloImpresion() {
         return soloImpresion;
     }
-
-    public boolean isEsAlterno() {
+    public boolean esAlterno() {
         return esAlterno;
     }
 }

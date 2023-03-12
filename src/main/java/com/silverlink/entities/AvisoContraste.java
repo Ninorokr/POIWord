@@ -4,6 +4,7 @@ import net.sourceforge.barbecue.output.SizingOutput;
 
 import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import static com.silverlink.Main.*;
@@ -40,6 +41,7 @@ public class AvisoContraste {
     private short anioFab;
     private LocalDate fechaContraste1;
     private LocalDate fechaContraste2; //Los NTSCE tienen fecha2
+    private LocalTime hora;
 
     //Crear columnas y llaves para estos campos
     //Datos adicionales (empresa contrastadora)
@@ -162,14 +164,14 @@ public class AvisoContraste {
     public double getLatitud() {
         return latitud;
     }
-    public void setLatitud(String latitud) {
-        this.latitud = Short.parseShort(latitud.replaceAll("[^0-9]", ""));
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
     }
     public double getLongitud() {
         return longitud;
     }
-    public void setLongitud(String longitud) {
-        this.longitud = Short.parseShort(longitud.replaceAll("[^0-9]", ""));
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
     public short getIdSET() {
         return idSET;
@@ -278,6 +280,13 @@ public class AvisoContraste {
         this.fechaContraste2 = fechaContraste2; //TODO definir límites para la fecha a contrastar
     }
 
+    public LocalTime getHora() {
+        return hora;
+    }
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+
     //Datos adicionales (empresa contrastadora)
 
     public byte getIdEmpresaContrastadora() {
@@ -299,7 +308,6 @@ public class AvisoContraste {
         }
         this.idEmpresaContrastadora = emp.getIdEmpContrastadora();
     }
-
     public String getPatron() {
         return patron;
     }
@@ -313,7 +321,7 @@ public class AvisoContraste {
         this.carga = carga;
     }
     public PersonalContrastador getPersonalContrastador() {
-        return PersonalContrastador;
+        return this.personalContrastador;
     }
     public void setPersonalContrastador(String dni, String nombre, String apellido){
         int dniPersonalContrastador = Integer.parseInt(dni);
@@ -328,7 +336,7 @@ public class AvisoContraste {
                 flag = false;
             }
         }
-        this.personalContrastador = ;
+        this.personalContrastador = personal;
     }
 
     //Datos operativos

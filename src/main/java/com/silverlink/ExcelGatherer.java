@@ -1,7 +1,7 @@
 package com.silverlink;
 
 import com.silverlink.entities.AvisoContraste;
-import com.silverlink.entities.PersonalContrastador;
+import com.silverlink.entities.OrdenServicio;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -12,6 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -163,52 +164,49 @@ public class ExcelGatherer {
         return null;
     }
 
-    public static void recorrerDatos(XSSFSheet sheet, ArrayList<Integer> numsColumna){
+    public static void recorrerDatos(XSSFSheet sheet, ArrayList<Integer> numsColumna, OrdenServicio os){
         AvisoContraste aviso = new AvisoContraste();
 
-//        for (int i = 1; i < sheet.getLastRowNum(); i++) {
-//            XSSFRow row = sheet.getRow(i);
-//            for (int j = 0; j < 28; j++) {
-//                switch(j){
-//                    case 0: aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numsColumna.get(j)))); break;//CORRELATIVO
-//                    case 1:
-//                }
-//            }
-//        }
-
-        String[] campos = {"Hora", "Patrón", "Carga", "DNITec", "ApellidoTec", "NombreTec"};
-
+            XSSFRow row;
         for (int i = 1; i < sheet.getLastRowNum(); i++) {
-            XSSFRow row = sheet.getRow(i);
-            aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numsColumna.get(0))));
-            aviso.setNumCliente(getCellValueAsString(row.getCell(numsColumna.get(1))));
-            aviso.setNomCliente(getCellValueAsString(row.getCell(numsColumna.get(2))));
-            aviso.setDireccion(getCellValueAsString(row.getCell(numsColumna.get(3))));
-            aviso.setDistrito(getCellValueAsString(row.getCell(numsColumna.get(4))));
-            aviso.setIdSucursal(getCellValueAsString(row.getCell(numsColumna.get(5))));
-            aviso.setNumSector(getCellValueAsString(row.getCell(numsColumna.get(6))));
-            aviso.setNumZona(getCellValueAsString(row.getCell(numsColumna.get(7))));
-            aviso.setNumCorrelativo2(getCellValueAsString(row.getCell(numsColumna.get(8))));
-            aviso.setPromedio(getCellValueAsString(row.getCell(numsColumna.get(9))));
-            aviso.setLatitud(getCellValueAsString(row.getCell(numsColumna.get(10))));
-            aviso.setLongitud(getCellValueAsString(row.getCell(numsColumna.get(11))));
-            aviso.setIdSET(getCellValueAsString(row.getCell(numsColumna.get(12))));
-            aviso.setNumSEDyLetraSED(getCellValueAsString(row.getCell(numsColumna.get(13))));
-            aviso.setIdMarcaMedidor(getCellValueAsString(row.getCell(numsColumna.get(14))));
-            aviso.setIdModeloMedidor(getCellValueAsString(row.getCell(numsColumna.get(15))));
-            aviso.setNumMedidor(getCellValueAsString(row.getCell(numsColumna.get(16))));
-            aviso.setIdFase(getCellValueAsString(row.getCell(numsColumna.get(17))));
-            aviso.setAnioFab(getCellValueAsString(row.getCell(numsColumna.get(18))));
-            aviso.setIdEmpresaContrastadora(getCellValueAsString(row.getCell(numsColumna.get(19))));
-            aviso.setFechaContraste1(LocalDate.from(row.getCell(numsColumna.get(20)).getLocalDateTimeCellValue()));
-            aviso.setFechaContraste2(LocalDate.from(row.getCell(numsColumna.get(21)).getLocalDateTimeCellValue()));
-            aviso.setHora(getCellValueAsString(row.getCell(numsColumna.get(22))));
-            aviso.setPatron(getCellValueAsString(row.getCell(numsColumna.get(23))));
-            aviso.setCarga(getCellValueAsString(row.getCell(numsColumna.get(24))));
-            aviso.setPersonalContrastador(getCellValueAsString(row.getCell(numsColumna.get(25))),
-                            getCellValueAsString(row.getCell(numsColumna.get(26))),
-                            getCellValueAsString(row.getCell(numsColumna.get(27))));
-            //TODO Si el valor de numsColumna es -1, que el valor sea null y se almacene en la BD como null
+             row = sheet.getRow(i);
+             int numColumna;
+             for(int j = 0; j < 26; j++){
+                 numColumna = numsColumna.get(j);
+                 switch(numColumna){
+                     case -1: break;
+                     case 0: aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 1: aviso.setNumCliente(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 2: aviso.setNomCliente(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 3: aviso.setDireccion(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 4: aviso.setDistrito(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 5: aviso.setIdSucursal(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 6: aviso.setNumSector(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 7: aviso.setNumZona(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 8: aviso.setNumCorrelativo2(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 9: aviso.setPromedio(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 10: aviso.setLatitud(row.getCell(numColumna).getNumericCellValue()); break;
+                     case 11: aviso.setLongitud(row.getCell(numColumna).getNumericCellValue()); break;
+                     case 12: aviso.setIdSET(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 13: aviso.setNumSEDyLetraSED(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 14: aviso.setIdMarcaMedidor(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 15: aviso.setIdModeloMedidor(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 16: aviso.setNumMedidor(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 17: aviso.setIdFase(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 18: aviso.setAnioFab(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 19: aviso.setIdEmpresaContrastadora(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 20: aviso.setFechaContraste1(LocalDate.from(row.getCell(numColumna).getLocalDateTimeCellValue())); break;
+                     case 21: if(os.esAlterno() && !os.esNTSCE())
+                         aviso.setFechaContraste2(LocalDate.from(row.getCell(numColumna).getLocalDateTimeCellValue()));
+                     break;
+                     case 22: aviso.setHora(LocalTime.from(row.getCell(numColumna).getLocalDateTimeCellValue())); break;
+                     case 23: aviso.setPatron(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 24: aviso.setCarga(getCellValueAsString(row.getCell(numColumna))); break;
+                     case 25: aviso.setPersonalContrastador(getCellValueAsString(row.getCell(numColumna)),
+                                                        getCellValueAsString(row.getCell(numsColumna.get(26))),
+                                                        getCellValueAsString(row.getCell(numsColumna.get(27)))); break;
+                 }
+             }
         }
     }
 }

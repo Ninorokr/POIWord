@@ -27,9 +27,9 @@ public class Commander {
             ps.setString(2, os.getDescripcion());
             ps.setString(3, os.getIdCECO());
             ps.setInt(4, os.getIdUsuario());
-            ps.setBoolean(5, os.isEsNTSCE());
+            ps.setBoolean(5, os.esNTSCE());
             ps.setBoolean(6, os.isSoloImpresion());
-            ps.setBoolean(7, os.isEsAlterno());
+            ps.setBoolean(7, os.esAlterno());
             ps.execute();
         } catch(SQLException sqle){
             System.out.println("No se pudo insertar la OS");
@@ -48,9 +48,9 @@ public class Commander {
             ps.setString(3, os.getDescripcion());
             ps.setString(4, os.getIdCECO());
             ps.setInt(5, os.getIdUsuario());
-            ps.setBoolean(6, os.isEsNTSCE());
+            ps.setBoolean(6, os.esNTSCE());
             ps.setBoolean(7, os.isSoloImpresion());
-            ps.setBoolean(8, os.isEsAlterno());
+            ps.setBoolean(8, os.esAlterno());
             ps.execute();
         } catch(SQLException sqle){
             System.out.println("No se pudo insertar la OS");
