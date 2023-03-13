@@ -6,7 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 
 import java.util.*;
 
-import static com.silverlink.ExcelGatherer.getCellValueAsString;
+import static com.silverlink.ProcesadorDatos.getCellValueAsString;
 import static com.silverlink.Main.scanner;
 
 public class Directrices {

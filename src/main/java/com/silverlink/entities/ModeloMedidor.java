@@ -33,9 +33,9 @@ public class ModeloMedidor {
         this.nomModeloMedidor = nomModeloMedidor;
     }
 
-    public static ModeloMedidor existeModeloMedidor(String nomModeloMedidor){
+    public static ModeloMedidor existeModeloMedidor(short idMarcaMedidor, String nomModeloMedidor){
         for(ModeloMedidor modelo : modelosMedidor){
-            if(modelo.getNomModeloMedidor().equals(nomModeloMedidor))
+            if(modelo.getIdMarcaMedidor() == idMarcaMedidor && modelo.getNomModeloMedidor().equals(nomModeloMedidor))
                 return modelo;
         }
         return null;

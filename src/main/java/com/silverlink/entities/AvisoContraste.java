@@ -158,8 +158,8 @@ public class AvisoContraste {
     public double getPromedio() {
         return promedio;
     }
-    public void setPromedio(String promedio) {
-        this.promedio = Double.parseDouble(promedio);
+    public void setPromedio(double promedio) {
+        this.promedio = promedio;
     }
     public double getLatitud() {
         return latitud;
@@ -205,13 +205,13 @@ public class AvisoContraste {
     public short getIdMarcaMedidor() {
         return idMarcaMedidor;
     }
-    public void setIdMarcaMedidor(String nomMarcaMedidor) {
+    public void setIdMarcaMedidor(String codMarcaMedidor) {
         boolean flag = true;
         MarcaMedidor marcaMedidor = null;
         while(flag){
-            marcaMedidor = MarcaMedidor.existeMarcaMedidor(nomMarcaMedidor);
+            marcaMedidor = MarcaMedidor.existeMarcaMedidor(codMarcaMedidor);
             if(marcaMedidor == null){
-                insertMarcaMedidorToDB(nomMarcaMedidor);
+                insertMarcaMedidorToDB(codMarcaMedidor);
             } else {
                 flag = false;
             }
@@ -225,7 +225,7 @@ public class AvisoContraste {
         boolean flag = true;
         ModeloMedidor modeloMedidor = null;
         while(flag){
-            modeloMedidor = ModeloMedidor.existeModeloMedidor(nomModeloMedidor);
+            modeloMedidor = ModeloMedidor.existeModeloMedidor(idMarcaMedidor, nomModeloMedidor);
             if(modeloMedidor == null){
                 insertModeloMedidorToDB(getIdMarcaMedidor(), nomModeloMedidor);
             } else {
@@ -324,14 +324,13 @@ public class AvisoContraste {
         return this.personalContrastador;
     }
     public void setPersonalContrastador(String dni, String nombre, String apellido){
-        int dniPersonalContrastador = Integer.parseInt(dni);
+        int dniAsInt = Integer.parseInt(dni);
         boolean flag = true;
         PersonalContrastador personal = null;
         while(flag){
-            personal = PersonalContrastador.existePersonalContrastador(dni);
+            personal = PersonalContrastador.existePersonalContrastador(dniAsInt);
             if(personal == null){
-                insertPersonalContrastadorToDB(getIdEmpresaContrastadora(), personal.getDniPersonalContrastador(),
-                        personal.getNomPersonalContrastador(), personal.getApePersonalContrastador());
+                insertPersonalContrastadorToDB(getIdEmpresaContrastadora(), dniAsInt, nombre, apellido);
             } else {
                 flag = false;
             }

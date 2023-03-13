@@ -1,7 +1,6 @@
 package com.silverlink.entities;
 
 import static com.silverlink.Main.fases;
-import static com.silverlink.Main.modelosMedidor;
 
 public class Fase {
 
@@ -36,9 +35,16 @@ public class Fase {
 
     public static Fase existeFase(String codFase){
         for(Fase fase : fases){
-            if(fase.getNomFase().equals(codFase))
+            if(fase.getCodFase().equals(codFase))
                 return fase;
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "idFase: " + idFase +
+                " | codFase: " + codFase +
+                " | nomFase: " + nomFase;
     }
 }

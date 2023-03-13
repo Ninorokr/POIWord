@@ -54,9 +54,9 @@ public class PersonalContrastador {
         this.apePersonalContrastador = apePersonalContrastador;
     }
 
-    public static PersonalContrastador existePersonalContrastador(String dniPersonalContrastador){
+    public static PersonalContrastador existePersonalContrastador(int dniPersonalContrastador){
         for(PersonalContrastador persCont : listaPersonalContrastador){
-            if(persCont.getDniPersonalContrastador() == Integer.parseInt(dniPersonalContrastador))
+            if(persCont.getDniPersonalContrastador() == dniPersonalContrastador)
                 return persCont;
         }
         return null;

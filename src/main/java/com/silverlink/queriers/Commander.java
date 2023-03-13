@@ -5,6 +5,7 @@ import com.silverlink.entities.PersonalContrastador;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 
 import static com.silverlink.Main.*;
 import static com.silverlink.queriers.Querier.*;
@@ -17,13 +18,15 @@ public class Commander {
     //En cuyo caso, obtener el ultimo nro de OS y sumar 1
     //IMPORTANTE: Nunca se eliminará una OS
 
-    public static void crearOS(OrdenServicio os){
+    public static void crearNuevaOS(OrdenServicio os){
 
         String insertOS = "INSERT INTO tblOSsContrastes (nroOS, descripcion, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno)" +
                             " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
+        int nuevoNumOS = cuentaOSporAnio() + 1;
+
         try(PreparedStatement ps = conn.prepareStatement(insertOS)){
-            ps.setInt(1, cuentaOSporAnio() + 1);
+            ps.setInt(1, nuevoNumOS);
             ps.setString(2, os.getDescripcion());
             ps.setString(3, os.getIdCECO());
             ps.setInt(4, os.getIdUsuario());
@@ -31,6 +34,7 @@ public class Commander {
             ps.setBoolean(6, os.isSoloImpresion());
             ps.setBoolean(7, os.esAlterno());
             ps.execute();
+            System.out.println("Se creó la OS " + 001 + "-" + 23 + "-" + nuevoNumOS);
         } catch(SQLException sqle){
             System.out.println("No se pudo insertar la OS");
             sqle.printStackTrace();
@@ -59,58 +63,64 @@ public class Commander {
     }
 
     public static void insertSucursalToDB(short numSucursal){
-        String insertSucursalQuery = "INSERT INTO tblSucursales (numSucursal) VALUES ?";
+        String insertSucursalQuery = "INSERT INTO tblSucursales (numSucursal) VALUES (?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertSucursalQuery)){
             ps.setShort(1, numSucursal);
             ps.execute();
+            System.out.println("Se insertó nueva sucursal: " + numSucursal);
         } catch (SQLException sqle){
             System.out.println("No se pudo ingresar la sucursal a la BD");
+            sqle.printStackTrace();
+            System.exit(0);
         }
-        System.out.println("Se insertó nueva sucursal: " + numSucursal);
         sucursales = querySucursales();
     }
     public static void insertSETToDB(String codSET){
-        String insertSETQuery = "INSERT INTO tblSETs (codSET) VALUES ?";
+        String insertSETQuery = "INSERT INTO tblSETs (codSET) VALUES (?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertSETQuery)){
             ps.setString(1, codSET);
             ps.execute();
+            System.out.println("Se insertó nueva SET: " + codSET);
         } catch (SQLException sqle){
             System.out.println("No se pudo ingresar la SET a la BD");
         }
-        System.out.println("Se insertó nueva SET: " + codSET);
+
         SETs = querySETs();
     }
-    public static void insertMarcaMedidorToDB(String nomMarcaMedidor){
-        String insertMarcaMedidorQuery = "INSERT INTO tblMarcasMedidor (codMarcaMedidor) VALUES ?";
+    public static void insertMarcaMedidorToDB(String codMarcaMedidor){
+        String insertMarcaMedidorQuery = "INSERT INTO tblMarcasMedidor (codMarcaMedidor) VALUES (?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertMarcaMedidorQuery)){
-            ps.setString(1, nomMarcaMedidor);
+            ps.setString(1, codMarcaMedidor);
             ps.execute();
         } catch (SQLException sqle){
             System.out.println("No se pudo ingresar la marca de medidor a la BD");
         }
-        System.out.println("Se insertó la nueva marca de medidor: " + nomMarcaMedidor);
+        System.out.println("Se insertó la nueva marca de medidor: " + codMarcaMedidor);
 
         marcaMedidores = queryMarcaMedidores();
     }
-    public static void insertModeloMedidorToDB(short IdMarcaMedidor, String nomModeloMedidor){
-        String insertModeloMedidorQuery = "INSERT INTO tblModelosMedidor (idMarcaMedidor, nomModeloMedidor) VALUES ?, ?";
+    public static void insertModeloMedidorToDB(short idMarcaMedidor, String nomModeloMedidor){
+        short nuevoIdModeloMedidor = (short)(queryModelosMedidorPorMarca(idMarcaMedidor) + 1);
+
+        String insertModeloMedidorQuery = "INSERT INTO tblModelosMedidor (idMarcaMedidor, idModeloMedidor, nomModeloMedidor) VALUES (?, ?, ?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertModeloMedidorQuery)){
-            ps.setShort(1, IdMarcaMedidor);
-            ps.setString(2, nomModeloMedidor);
+            ps.setShort(1, idMarcaMedidor);
+            ps.setShort(2, nuevoIdModeloMedidor);
+            ps.setString(3, nomModeloMedidor);
             ps.execute();
         } catch (SQLException sqle){
             System.out.println("No se pudo ingresar el modelo de medidor a la BD");
         }
         System.out.println("Se insertó el nuevo modelo de medidor: " + nomModeloMedidor);
 
-        marcaMedidores = queryMarcaMedidores();
+        modelosMedidor = queryModelosMedidor();
     }
     public static void insertFaseToDB(String codFase){
-        String insertFase = "INSERT INTO tblFases (nomFase) VALUES ?";
+        String insertFase = "INSERT INTO tblFases (nomFase) VALUES (?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertFase)){
             ps.setString(1, codFase);
@@ -123,7 +133,7 @@ public class Commander {
         fases = queryFases();
     }
     public static void insertEmpresaContrastadoraToDB(String aliasEmp){
-        String insertEmpContrastadora = "INSERT INTO tblEmpresasContrastadoras (aliasEmpresaContrastadora) VALUES ?";
+        String insertEmpContrastadora = "INSERT INTO tblEmpresasContrastadoras (aliasEmpresaContrastadora) VALUES (?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertEmpContrastadora)){
             ps.setString(1, aliasEmp);
@@ -138,7 +148,7 @@ public class Commander {
     public static void insertPersonalContrastadorToDB(byte idEmpresaContrastadora, int dni, String nombre, String apellido){
         PersonalContrastador persCont = new PersonalContrastador(idEmpresaContrastadora, dni, nombre, apellido);
         String insertPersCont = "INSERT INTO tblPersonalContrastador(idEmpresaContrastadora, dniPersonalContrastador," +
-                "nomPersonalContrastador, apePersonalContrastador) VALUES ?, ?, ?, ?";
+                "nomPersonalContrastador, apePersonalContrastador) VALUES (?, ?, ?, ?)";
 
         try(PreparedStatement ps = conn.prepareStatement(insertPersCont)){
             ps.setByte(1, idEmpresaContrastadora);

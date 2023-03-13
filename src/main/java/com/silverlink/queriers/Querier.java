@@ -30,23 +30,23 @@ public class Querier {
         }
         return CECOs;
     }
-    public static ArrayList<Usuario> queryUsuariosPorCECO(String CECO) {
+    public static ArrayList<UsuarioENEL> queryUsuariosPorCECO(String CECO) {
         String UsuariosQuery = "SELECT tblCECOsUsuarios.idUsuario, tblUsuarios.nomUsuario FROM tblCECOsUsuarios\n" +
                 "INNER JOIN tblUsuarios ON tblCECOsUsuarios.idUsuario = tblUsuarios.idUsuario\n" +
                 "WHERE idCECO = ?";
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+        ArrayList<UsuarioENEL> usuariosENEL = new ArrayList<>();
 
         try (PreparedStatement ps = conn.prepareStatement(UsuariosQuery)) {
             ps.setString(1, CECO);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                usuarios.add(new Usuario(rs.getInt(1), rs.getString(2)));
+                usuariosENEL.add(new UsuarioENEL(rs.getInt(1), rs.getString(2)));
             }
 
         } catch (SQLException sqle) {
             System.out.println("No se pudo consultar CECOs");
         }
-        return usuarios;
+        return usuariosENEL;
     }
     public static HashMap<Integer, String> queryServicios() {
         String serviciosQuery = "SELECT idServicio, nomServicio FROM tblServicios;";
@@ -97,7 +97,7 @@ public class Querier {
         return distritos;
     }
     public static ArrayList<Distrito> queryDistritosLimaYCallao() {
-        String distritosQuery = "SELECT idPais, idDepartamento, idProvincia, idDistrito, nomDistrito FROM tblDistritos" +
+        String distritosQuery = "SELECT idPais, idDepartamento, idProvincia, idDistrito, nomDistrito FROM tblDistritos " +
                                 "WHERE (idDepartamento = 7 OR idDepartamento = 15) AND idProvincia = 1";
         ArrayList<Distrito> distritos = new ArrayList<>();
         try (PreparedStatement ps = conn.prepareStatement(distritosQuery)) {
@@ -113,12 +113,12 @@ public class Querier {
         return distritos;
     }
     public static ArrayList<Sucursal> querySucursales() {
-        String sucursalesQuery = "SELECT idSucursal, nomSucursal FROM tblSucursales";
+        String sucursalesQuery = "SELECT idSucursal, numSucursal FROM tblSucursales";
         ArrayList<Sucursal> sucursales = new ArrayList<>();
         try (PreparedStatement ps = conn.prepareStatement(sucursalesQuery)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                sucursales.add(new Sucursal(rs.getByte(1), rs.getByte(2)));
+                sucursales.add(new Sucursal(rs.getByte(1), rs.getShort(2)));
             }
         } catch (SQLException sqle) {
             System.out.println("No se pudo consultar las sucursales");
@@ -126,6 +126,7 @@ public class Querier {
         }
         return sucursales;
     }
+
     public static ArrayList<SET> querySETs() {
         String SETsQuery = "SELECT idSET, codSET, nomSET FROM tblSETs";
         ArrayList<SET> SETs = new ArrayList<>();
@@ -155,7 +156,7 @@ public class Querier {
         return MarcaMedidores;
     }
     public static ArrayList<ModeloMedidor> queryModelosMedidor() {
-        String ModelosMedidorQuery = "SELECT [idMarcaMedidor], [idModeloMedidor], [codModeloMedidor] FROM [tblModelosMedidor]";
+        String ModelosMedidorQuery = "SELECT idMarcaMedidor, idModeloMedidor, nomModeloMedidor FROM tblModelosMedidor";
         ArrayList<ModeloMedidor> ModelosMedidor = new ArrayList<>();
         try (PreparedStatement ps = conn.prepareStatement(ModelosMedidorQuery)) {
             ResultSet rs = ps.executeQuery();
@@ -168,6 +169,23 @@ public class Querier {
         }
         return ModelosMedidor;
     }
+
+    public static short queryModelosMedidorPorMarca(short idMarcaMedidor) {
+        String CantidadModelosPorMarca = "SELECT COUNT(*) FROM tblModelosMedidor " +
+                "WHERE idMarcaMedidor = ?";
+        try (PreparedStatement ps = conn.prepareStatement(CantidadModelosPorMarca)) {
+            ps.setShort(1, idMarcaMedidor);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getShort(1);
+            }
+        } catch (SQLException sqle) {
+            System.out.println("No se pudo consultar la cantidad de modelos de medidor por marca");
+            sqle.printStackTrace();
+        }
+        return (short)0;
+    }
+
     public static ArrayList<Fase> queryFases() {
         String fasesQuery = "SELECT [idFase], [codFase], [nomFase] FROM tblFases";
         ArrayList<Fase> fases = new ArrayList<>();
@@ -183,7 +201,7 @@ public class Querier {
         return fases;
     }
     public static ArrayList<EmpresaContrastadora> queryEmpresasContrastadoras() {
-        String empresasContrastadorasQuery = "SELECT [idEmpresaContrastadora], [nomEmpresaContrastadora], [aliasEmpresaContrastadora] FROM [tblEmpresaContrastadora]";
+        String empresasContrastadorasQuery = "SELECT idEmpresaContrastadora, nomEmpresaContrastadora, aliasEmpresaContrastadora FROM tblEmpresasContrastadoras";
         ArrayList<EmpresaContrastadora> empresasContrastadoras = new ArrayList<>();
         try (PreparedStatement ps = conn.prepareStatement(empresasContrastadorasQuery)) {
             ResultSet rs = ps.executeQuery();
@@ -197,8 +215,8 @@ public class Querier {
         return empresasContrastadoras;
     }
     public static ArrayList<PersonalContrastador> queryPersonalContrastador() {
-        String personalContrastadorQuery = "SELECT [idEmpresaContrastadora], [idPersonalContrastador]," +
-                " [dniPersonalContrastador], [nomPersonalContrastador], [apePersonalContrastador] FROM [tblEmpresaContrastadora]";
+        String personalContrastadorQuery = "SELECT idEmpresaContrastadora, idPersonalContrastador," +
+                " dniPersonalContrastador, nomPersonalContrastador, apePersonalContrastador FROM tblPersonalContrastador";
         ArrayList<PersonalContrastador> personalContrastador = new ArrayList<>();
         try (PreparedStatement ps = conn.prepareStatement(personalContrastadorQuery)) {
             ResultSet rs = ps.executeQuery();

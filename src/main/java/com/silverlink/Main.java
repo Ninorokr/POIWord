@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static com.silverlink.ExcelGatherer.start;
+import static com.silverlink.ProcesadorDatos.RecopilarEIngresarDatos;
+import static com.silverlink.queriers.Commander.crearNuevaOS;
 import static com.silverlink.queriers.Querier.*;
 
 public class Main {
@@ -60,9 +61,8 @@ public class Main {
 
         OrdenServicio os = new OrdenServicio(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno);
 
-
-
-        start();
+        crearNuevaOS(os);
+        RecopilarEIngresarDatos();
 
 //        crearOS(os);
         //CONFLICTO: Qué pasa si se crea la OS y falla el análisis del Excel, no se puede volver a crear la OS
@@ -167,14 +167,6 @@ public class Main {
 
     /*TODO programar errores y contenciones*/
 
-//    private static int elegirServicio(Scanner scanner){
-//        HashMap<Integer, String> servicios = queryServicios();
-//        if(servicios.size() == 1) return 1;
-//        System.out.println("Elegir el servicio:");
-//        servicios.forEach((key, value) -> System.out.println(key + ". " + value));
-//        return scanner.nextInt();
-//    }
-
     public static String elegirCECO(Scanner scanner, int servicio){
         ArrayList<CECO> CECOs = queryCECOsPorServicio(servicio);
         if(CECOs.size() == 1) return CECOs.get(0).getIdCECO();
@@ -185,11 +177,11 @@ public class Main {
     }
 
     public static int elegirUsuario(Scanner scanner, String numCECO){
-        ArrayList<Usuario> usuarios = queryUsuariosPorCECO(numCECO);
-        if(usuarios.size() == 1) return 1;
+        ArrayList<UsuarioENEL> usuariosENEL = queryUsuariosPorCECO(numCECO);
+        if(usuariosENEL.size() == 1) return 1;
         System.out.println("Elegir el usuario:");
-        for(int i = 0; i < usuarios.size(); i++)
-            System.out.println(i+1 + ". " + /*usuarios.get(i).getIdUsuario() + " | " + */usuarios.get(i).getNomUsuario());
-        return usuarios.get(scanner.nextInt()-1).getIdUsuario();
+        for(int i = 0; i < usuariosENEL.size(); i++)
+            System.out.println(i+1 + ". " + /*usuariosENEL.get(i).getIdUsuario() + " | " + */usuariosENEL.get(i).getNomUsuarioENEL());
+        return usuariosENEL.get(scanner.nextInt()-1).getIdUsuarioENEL();
     }
 }

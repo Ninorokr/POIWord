@@ -18,30 +18,25 @@ public class MarcaMedidor {
     public short getIdMarcaMedidor() {
         return idMarcaMedidor;
     }
-
     public void setIdMarcaMedidor(byte idMarcaMedidor) {
         this.idMarcaMedidor = idMarcaMedidor;
     }
-
     public String getCodMarcaMedidor() {
         return codMarcaMedidor;
     }
-
     public void setCodMarcaMedidor(String codMarcaMedidor) {
         this.codMarcaMedidor = codMarcaMedidor;
     }
-
     public String getNomMarcaMedidor() {
         return nomMarcaMedidor;
     }
-
     public void setNomMarcaMedidor(String nomMarcaMedidor) {
         this.nomMarcaMedidor = nomMarcaMedidor;
     }
 
-    public static MarcaMedidor existeMarcaMedidor(String nomMarcaMedidor){
+    public static MarcaMedidor existeMarcaMedidor(String codMarcaMedidor){
         for(MarcaMedidor marca : marcaMedidores){
-            if(marca.getNomMarcaMedidor().equals(nomMarcaMedidor))
+            if(marca.getCodMarcaMedidor().equals(codMarcaMedidor))
                 return marca;
         }
         return null;

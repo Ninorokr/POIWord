@@ -15,22 +15,18 @@ public class Sucursal {
     public short getIdSucursal() {
         return idSucursal;
     }
-
     public void setIdSucursal(short idSucursal) {
         this.idSucursal = idSucursal;
     }
-
     public short getNumSucursal() {
         return numSucursal;
     }
-
     public void setNumSucursal(short numSucursal) {
         this.numSucursal = numSucursal;
     }
-
-    public static Sucursal existeSucursal(short numSucursalAsString){
+    public static Sucursal existeSucursal(short numSucursal){
         for(Sucursal sucursal : sucursales){
-            if(sucursal.getNumSucursal() == numSucursalAsString)
+            if(sucursal.getNumSucursal() == numSucursal)
                 return sucursal;
         }
         return null;

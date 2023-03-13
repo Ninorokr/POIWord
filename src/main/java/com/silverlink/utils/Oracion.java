@@ -65,7 +65,6 @@ public class Oracion {
     public void tabular(){
             oracion.addTab();
     }
-
     public void tabular(int veces){
         for (int i = 0; i < veces; i++) {
             oracion.addTab();
@@ -75,7 +74,6 @@ public class Oracion {
     public void retornarCarro(){
             oracion.addCarriageReturn();
     }
-
     public void retornarCarro(int veces){
         for (int i = 0; i < veces; i++) {
             oracion.addCarriageReturn();

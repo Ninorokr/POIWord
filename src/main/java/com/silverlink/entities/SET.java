@@ -16,30 +16,25 @@ public class SET {
     public short getIdSET() {
         return idSET;
     }
-
     public void setIdSET(short idSET) {
         this.idSET = idSET;
     }
-
     public String getCodSET() {
         return codSET;
     }
-
     public void setCodSET(String codSET) {
         this.codSET = codSET;
     }
-
     public String getNomSET() {
         return nomSET;
     }
-
     public void setNomSET(String nomSET) {
         this.nomSET = nomSET;
     }
 
     public static SET existeSET(String codSET){
         for(SET set : SETs){
-            if(set.getNomSET().equals(codSET))
+            if(set.getCodSET().equals(codSET))
                 return set;
         }
         return null;
