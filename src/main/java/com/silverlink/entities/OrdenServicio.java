@@ -6,7 +6,7 @@ public class OrdenServicio {
 
     private int idServicio;
     private int anio;
-    private int nroOS;
+    private short nroOS;
     private Date fechaOS;
     private String descripcion;
     private String idCECO;
@@ -31,7 +31,7 @@ public class OrdenServicio {
     public int getAnio() {
         return anio;
     }
-    public int getNroOS() {
+    public short getNroOS() {
         return nroOS;
     }
     public Date getFechaOS() {

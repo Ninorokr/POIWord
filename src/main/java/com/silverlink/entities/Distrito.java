@@ -1,24 +1,20 @@
 package com.silverlink.entities;
 
-import com.silverlink.Main;
-
 import java.text.Normalizer;
 import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
 
 import static com.silverlink.Main.distritos;
 import static com.silverlink.Main.scanner;
 
 public class Distrito implements Comparable<Distrito>{
 
-    private int idPais;
-    private int idDepartamento;
-    private int idProvincia;
-    private int idDistrito;
+    private short idPais;
+    private short idDepartamento;
+    private short idProvincia;
+    private short idDistrito;
     private String nomDistrito;
 
-    public Distrito(int idPais, int idDepartamento, int idProvincia, int idDistrito, String nomDistrito) {
+    public Distrito(short idPais, short idDepartamento, short idProvincia, short idDistrito, String nomDistrito) {
         this.idPais = idPais;
         this.idDepartamento = idDepartamento;
         this.idProvincia = idProvincia;
@@ -26,16 +22,16 @@ public class Distrito implements Comparable<Distrito>{
         this.nomDistrito = nomDistrito;
     }
 
-    public int getIdPais() {
+    public short getIdPais() {
         return idPais;
     }
-    public int getIdDepartamento() {
+    public short getIdDepartamento() {
         return idDepartamento;
     }
-    public int getIdProvincia() {
+    public short getIdProvincia() {
         return idProvincia;
     }
-    public int getIdDistrito() {
+    public short getIdDistrito() {
         return idDistrito;
     }
     public String getNomDistrito() {

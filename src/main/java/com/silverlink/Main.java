@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import static com.silverlink.ProcesadorDatos.RecopilarEIngresarDatos;
+import static com.silverlink.ProcesadorDatos.RecopilarEInsertarDatos;
 import static com.silverlink.queriers.Commander.crearNuevaOS;
 import static com.silverlink.queriers.Querier.*;
 
@@ -62,7 +62,7 @@ public class Main {
         OrdenServicio os = new OrdenServicio(numServicio, descripcionOS, idCECO, idUsuario, esNTSCE, soloImpresion, esAlterno);
 
         crearNuevaOS(os);
-        RecopilarEIngresarDatos();
+        RecopilarEInsertarDatos(os);
 
 //        crearOS(os);
         //CONFLICTO: Qué pasa si se crea la OS y falla el análisis del Excel, no se puede volver a crear la OS

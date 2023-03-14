@@ -34,7 +34,7 @@ public class EmpresaContrastadora {
     }
     public static EmpresaContrastadora existeEmpresa(String aliasEmp){
         for(EmpresaContrastadora emp : empresasContrastadoras){
-            if(emp.getNomEmpContrastadora().equals(aliasEmp))
+            if(emp.getAliasEmpContrastadora().equals(aliasEmp))
                 return emp;
         }
         return null;
@@ -42,6 +42,6 @@ public class EmpresaContrastadora {
 
     @Override
     public String toString() {
-        return this.getIdEmpContrastadora() + " | " + this.getNomEmpContrastadora() + ": " + this.getAliasEmpContrastadora();
+        return this.getIdEmpContrastadora() + " | " + this.getNomEmpContrastadora() + " | " + this.getAliasEmpContrastadora();
     }
 }

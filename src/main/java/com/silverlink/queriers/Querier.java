@@ -171,9 +171,9 @@ public class Querier {
     }
 
     public static short queryModelosMedidorPorMarca(short idMarcaMedidor) {
-        String CantidadModelosPorMarca = "SELECT COUNT(*) FROM tblModelosMedidor " +
+        String cantidadModelosPorMarca = "SELECT COUNT(*) FROM tblModelosMedidor " +
                 "WHERE idMarcaMedidor = ?";
-        try (PreparedStatement ps = conn.prepareStatement(CantidadModelosPorMarca)) {
+        try (PreparedStatement ps = conn.prepareStatement(cantidadModelosPorMarca)) {
             ps.setShort(1, idMarcaMedidor);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -181,6 +181,21 @@ public class Querier {
             }
         } catch (SQLException sqle) {
             System.out.println("No se pudo consultar la cantidad de modelos de medidor por marca");
+            sqle.printStackTrace();
+        }
+        return (short)0;
+    }
+    public static short queryPersonalContrastadorPorEmpresa(short idEmpresaContrastadora){
+        String cantidadPersonalPorEmpresa = "SELECT COUNT(*) FROM tblPersonalContrastador " +
+                "WHERE idEmpresaContrastadora = ?";
+        try (PreparedStatement ps = conn.prepareStatement(cantidadPersonalPorEmpresa)) {
+            ps.setShort(1, idEmpresaContrastadora);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getShort(1);
+            }
+        } catch (SQLException sqle) {
+            System.out.println("No se pudo consultar la cantidad de personal contrastador por empresa");
             sqle.printStackTrace();
         }
         return (short)0;

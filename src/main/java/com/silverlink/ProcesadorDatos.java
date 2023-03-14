@@ -1,6 +1,7 @@
 package com.silverlink;
 
 import com.silverlink.entities.AvisoContraste;
+import com.silverlink.entities.OrdenServicio;
 import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -15,14 +16,17 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import static com.silverlink.Main.scanner;
+import static com.silverlink.queriers.Commander.insertAvisoContrasteToDB;
+import static com.silverlink.queriers.Commander.idAvisoContraste;
 
 public class ProcesadorDatos {
 
-    public static void RecopilarEIngresarDatos(){
+    public static void RecopilarEInsertarDatos(OrdenServicio os){
         String rutaArchivoExcel = ingresarRutaDeArchivo();
         XSSFSheet sheet = obtenerHojaDeExcel(rutaArchivoExcel);
         ArrayList<Integer> elecciones = elegirColumnasConDatos(sheet);
-        recorrerDatos(sheet, elecciones);
+        ArrayList<AvisoContraste> avisos = recorrerDatos(sheet, elecciones);
+        insertarAvisosABD(os, avisos);
     }
 
     public static String ingresarRutaDeArchivo(){
@@ -129,17 +133,19 @@ public class ProcesadorDatos {
         return elecciones;
     }
 
-    public static void recorrerDatos(XSSFSheet sheet, ArrayList<Integer> numsColumna){
-        AvisoContraste aviso = new AvisoContraste();
+    public static ArrayList<AvisoContraste> recorrerDatos(XSSFSheet sheet, ArrayList<Integer> numsColumna){
+        AvisoContraste aviso = null;
+        ArrayList<AvisoContraste> avisos = new ArrayList<>();
 
             XSSFRow row;
-        for (int i = 1; i < sheet.getLastRowNum(); i++) {
+        for (int i = 1; i < sheet.getLastRowNum() + 1; i++) {
              row = sheet.getRow(i);
              int numColumna;
+             aviso = new AvisoContraste();
              for(int j = 0; j < 26; j++){
                  numColumna = numsColumna.get(j);
-                 switch(numColumna){
-                     case -1: break;
+                 if(numColumna < 0) continue;
+                 switch(j){
                      case 0: aviso.setNumCorrelativo(getCellValueAsString(row.getCell(numColumna))); break;
                      case 1: aviso.setNumCliente(getCellValueAsString(row.getCell(numColumna))); break;
                      case 2: aviso.setNomCliente(getCellValueAsString(row.getCell(numColumna))); break;
@@ -173,7 +179,16 @@ public class ProcesadorDatos {
                                                         getCellValueAsString(row.getCell(numsColumna.get(27)))); break;
                  }
              }
+             avisos.add(aviso);
             System.out.println(i + ". " + aviso.getNumCorrelativo());
+        }
+        return avisos;
+    }
+
+    public static void insertarAvisosABD(OrdenServicio os, ArrayList<AvisoContraste> avisos){
+        for(AvisoContraste aviso : avisos){
+            idAvisoContraste = 0;
+            insertAvisoContrasteToDB(os, aviso);
         }
     }
 
@@ -193,4 +208,6 @@ public class ProcesadorDatos {
         }
         return null;
     }
+
+
 }

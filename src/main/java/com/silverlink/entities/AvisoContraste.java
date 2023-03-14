@@ -1,11 +1,7 @@
 package com.silverlink.entities;
 
-import net.sourceforge.barbecue.output.SizingOutput;
-
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 import static com.silverlink.Main.*;
 import static com.silverlink.entities.Distrito.descifrarDistrito;
@@ -238,7 +234,7 @@ public class AvisoContraste {
         return numMedidor;
     }
     public void setNumMedidor(String numMedidor) {
-        this.numMedidor = Short.parseShort(numMedidor.replaceAll("[^0-9]", ""));
+        this.numMedidor = Integer.parseInt(numMedidor.replaceAll("[^0-9]", ""));
     }
     public byte getIdFase() {
         return idFase;

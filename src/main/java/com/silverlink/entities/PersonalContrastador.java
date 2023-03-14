@@ -64,7 +64,13 @@ public class PersonalContrastador {
 
     @Override
     public String toString() {
-        return "EmpCont: " + empresasContrastadoras.get(idEmpresaContrastadora) +
+        EmpresaContrastadora empCont = null;
+        for(EmpresaContrastadora emp : empresasContrastadoras){
+            if(emp.getIdEmpContrastadora() == idEmpresaContrastadora)
+                empCont = emp;
+        }
+
+        return "EmpCont: " + empCont.getAliasEmpContrastadora() +
                 " | DNI: " + dniPersonalContrastador +
                 " | Nombre: " + nomPersonalContrastador +
                 " | Apellido: " + apePersonalContrastador;
